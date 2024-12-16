@@ -15,7 +15,7 @@ class AppLayout extends Component
         // return view('layouts.app');
         $isAdminRoute = preg_match('/^admin\//', request()->path());
         $layout = $isAdminRoute ? 'admin.layouts.app' : 'layouts.app';
-
+        
         return view($layout);
     }
 }

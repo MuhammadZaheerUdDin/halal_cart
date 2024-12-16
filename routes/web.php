@@ -28,6 +28,7 @@ Route::get('/', HomeComponent::class)->name('home');
     //     Route::get('/home', [HomeController::class, 'index']);
     //     Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
     // });
+
 // Admin Routes
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
