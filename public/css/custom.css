@@ -33,6 +33,12 @@ label {
     text-align: center; /* Center text inside */
 }
 
+.border-div-inner{
+    /* border: 0.001px solid #d5bdbd; */
+    border: 2px solid #bbb1b1;
+    border-radius: 65px !important;
+}
+
 .border-rad-1{
     border: 0.001px solid  #e5dfdf; /* Solid black border */
     border-radius: 15px !important; /* Soft rounded corners */

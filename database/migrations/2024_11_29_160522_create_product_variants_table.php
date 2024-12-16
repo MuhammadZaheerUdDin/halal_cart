@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('variant_value'); // Example: 'Large', 'Red'
             $table->string('price'); // Optional price adjustment
             $table->integer('stock')->default(0); // Stock for this variant
+            $table->integer('is_disabled')->default(0); // Stock for this variant
             $table->timestamps();
         });
     }

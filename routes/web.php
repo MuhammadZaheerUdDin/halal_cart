@@ -43,6 +43,7 @@ Route::prefix('admin')->group(function () {
         })->name('admin');
         Route::get('/products',AdminProductComponent::class)->name('admin.products');
         Route::get('/product/create',AdminProductCreateCompoment::class)->name('admin.product.create');
+        Route::get('/product/edit/{id}', AdminProductCreateCompoment::class)->name('admin.product.edit');
         Route::get('/categories',AdminCategoryComponent::class)->name('admin.categories');
         Route::get('/subcategories',AdminSubCategoryComponent::class)->name('admin.subcategories');
     });

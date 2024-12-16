@@ -31,17 +31,7 @@ class ProductComponent extends Component
 
     public $isEditing = false;
 
-    // protected $rules = [
-    //     'name' => 'required|string|max:255',
-    //     'description' => 'nullable|string',
     //     'price' => 'nullable|numeric|regex:/^\d+(\.\d{1,2})?$/', // Validate decimal with max 2 digits after decimal
-    //     // 'price' => 'required|numeric|min:0',
-    //     'stock' => 'required|integer|min:0',
-    //     // 'sku' => 'required|string|max:255|unique:products,sku',
-    //     'sku' => 'required|string|max:100|unique:products,sku' . ($this->productId ? ",$this->productId" : ''),
-    //     'category_id' => 'required|exists:categories,id',
-    //     'image' => 'nullable|image|max:2048', // 2MB max
-    // ];
     protected function rules()
     {
         return [

@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Admin\Product;
 
-use App\Models\Product;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVariant;
 use App\Models\SubCategory;
@@ -16,7 +16,7 @@ class Create extends Component
     use WithFileUploads;
 
     public $products, $variants = [], $images = [], $previewImages = [];
-    public $name, $description, $price, $stock, $sku, $category_id, $image, $productId, $categories, $subcategories;
+    public $name, $description, $price, $stock, $sku, $category_id, $is_disabled, $image, $productId, $categories, $subcategories;
     
     public $variant_name
     ,$variant_value
@@ -49,12 +49,24 @@ class Create extends Component
         ];
     }
 
-    public function mount()
+    // public function mount()
+    // {
+    //     $this->categories = Category::first();//all();
+    //     $this->subcategories = SubCategory::all();
+    // }
+    public function mount($id = null)
     {
-        $this->categories = Category::first();//all();
-        $this->subcategories = SubCategory::all();
+        if ($id) {
+            $this->isEditing = true;
+            $this->productId = $id;
+            $this->editProduct($id);  // Load the product details if we're editing
+            // $this->loadProduct();
+        } else {
+            $this->categories = Category::all();
+            $this->subcategories = SubCategory::all();
+        }
     }
-
+    
     public function render()
     {
         $this->categories = Category::first();//all();
@@ -132,7 +144,7 @@ class Create extends Component
     
     public function editProduct($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with('variants', 'images')->findOrFail($id);
         $this->productId = $product->id;
         $this->name = $product->name;
         $this->description = $product->description;
@@ -140,8 +152,13 @@ class Create extends Component
         $this->stock = $product->stock;
         $this->sku = $product->sku;
         $this->category_id = $product->category_id;
-        $this->image = null;
-        $this->isEditing = true;
+        $this->variants = $product->variants; // Load product variants
+        $this->images = $product->images; // Load product images
+        $this->is_disabled = $product->is_disabled; // Load product images
+        // $this->isEditing = true; // Set editing mode to true
+        // dd($product->variants->toArray());
+        $this->variants = $product->variants->toArray(); // Load all variants
+        $this->images = $product->images->pluck('image_path')->toArray(); // Load image paths
     }
 
     public function updateProduct()
@@ -168,8 +185,61 @@ class Create extends Component
             'category_id' => $this->category_id, // Ensure this is an integer
         ]);
 
+        // Update variants
+        foreach ($this->variants as $variant) {
+            ProductVariant::updateOrCreate(
+                ['id' => $variant['id'] ?? null], 
+                [
+                    'product_id' => $product->id,
+                    'variant_name' => $variant['name'],
+                    'variant_value' => $variant['value'],
+                    'price' => $variant['price'],
+                    'stock' => $variant['stock'],
+                ]
+            );
+        }        
+
+        // Update images
+        foreach ($this->images as $image) {
+            $path = $image->store('product_images');
+            ProductImage::create([
+                'product_id' => $product->id,
+                'image_path' => $path,
+                'is_main' => false,
+            ]);
+        }        
         session()->flash('message', 'Product updated successfully.');
         $this->resetFields();
+    }
+    
+    public function updateVariant($index){
+
+        $variant = $this->variants[$index]; // Access the specific variant by index
+
+        // Validate the variant data
+        $this->validate([
+            "variants.{$index}.variant_name" => 'required|string|max:255',
+            "variants.{$index}.variant_value" => 'required|string|max:255',
+            "variants.{$index}.price" => 'required|numeric',
+            "variants.{$index}.stock" => 'required|integer',
+            "variants.{$index}.is_disabled" => 'boolean',
+        ]);
+        // if ($this->getTotalVariantStock() != $this->stock) {
+        //     session()->flash('error', 'Total variant stock cannot deviate the product quantity.');
+        // }
+    
+        // Perform update on the specific variant
+        $productVariant = ProductVariant::findOrFail($variant['id']);
+        $productVariant->update([
+            'variant_name' => $variant['variant_name'],
+            'variant_value' => $variant['variant_value'],
+            'price' => $variant['price'],
+            'stock' => $variant['stock'],
+            'is_disabled' => $variant['is_disabled'],
+        ]);
+    
+        // Optionally, flash a success message
+        session()->flash('variant_success_message', 'Variant updated successfully.');
     }
 
     public function deleteProduct($id)
@@ -217,6 +287,7 @@ class Create extends Component
         session()->flash('message', 'Images updated successfully!');
         $this->images = []; // Reset images input
     }
+
     public function updatedImages()
     {
         $this->validate([
@@ -229,4 +300,10 @@ class Create extends Component
             $this->previewImages[] = $image->temporaryUrl();
         }
     }
+
+    public function getTotalVariantStock()
+    {
+        return array_sum(array_column($this->variants, 'stock'));
+    }
+
 }

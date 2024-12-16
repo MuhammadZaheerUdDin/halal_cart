@@ -1,5 +1,5 @@
 <div class="w-3/4 mx-auto" >
-    <h1 class="text-2xl font-bold">Manage Products</h1>
+    <h1 class="text-2xl font-bold">Manage Products (Update Product and Variants)</h1>
 
     <div class="w-4/5 border-div" style="">
         <x-breadcrumb />
@@ -16,7 +16,7 @@
     <div class="border-div">
         <h5 class="text-2xl font-bold">  {{ $isEditing ? 'Update Product' : 'Create Product' }}</h1>
             
-        <form wire:submit.prevent="{{ $isEditing ? 'updateProduct' : 'createProduct' }}" class="grid grid-cols-2 gap-6 mb-6">
+        <form wire:submit.prevent="{{ $isEditing ? 'updateProduct' : 'createProduct' }}" class="grid grid-cols-2 gap-6 mb-6  border-div border-div-inner">
             <!-- Product Info-->
             <!-- <div class="col-span-2">
                 <div class="col-span-4 md:col-span-2">
@@ -78,29 +78,33 @@
                 <!-- Description -->
             <div class="col-span-2 md:col-span-1">
                 <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
-                <textarea id="description" wire:model="description" 
+                <textarea id="description" wire:model="description" rows="10" 
                         class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"></textarea>
                 @error('description') 
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
             <!-- Product Variants-->
-            <div class="col-span-2">
-                <h3 class="font-bold mb-2">Add Variants</h3>
-            </div>
-            <div class="col-span-2 md:col-span-1">
-                <input type="text" wire:model="variant_name" placeholder="Variant Name (e.g., Size)" class="p-2 border rounded mb-2">
-            </div>
-            <div class="col-span-2 md:col-span-1">
-                <input type="text" wire:model="variant_value" placeholder="Variant Value (e.g., Large)" class="p-2 border rounded mb-2">
-            </div>
-            <div class="col-span-2 md:col-span-1">
-                <input type="number" wire:model="variant_price" placeholder="Price Adjustment" class="p-2 border rounded mb-2">
-            </div>
-            <div class="col-span-2 md:col-span-1">
-                <input type="number" wire:model="variant_stock" placeholder="Stock" class="p-2 border rounded mb-2">
-                <button type="button" wire:click="addVariant" class="bg-blue-500 text-white px-4 py-2 rounded">Add Variant</button>
-            </div>
+            <div class=" md:col-span-1 border-div">
+                <div class="col-span-2">
+                    <h3 class="font-bold mb-2">Add Variants</h3>
+                </div>
+                <div class="col-span-2 md:col-span-1 p-1">
+                    <input type="text" wire:model="variant_name" placeholder="Variant Name (e.g., Size)" class="p-2 border rounded mb-2">
+                </div>
+                <div class="col-span-2 md:col-span-1 p-1">
+                    <input type="text" wire:model="variant_value" placeholder="Variant Value (e.g., Large)" class="p-2 border rounded mb-2">
+                </div>
+                <div class="col-span-2 md:col-span-1 p-1">
+                    <input type="number" wire:model="variant_price" placeholder="Price Adjustment (if not place '0')" class="p-2 border rounded mb-2">
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                    <input type="number" wire:model="variant_stock" placeholder="Stock" class="p-2 border rounded mb-2">
+                    <div class="p-2">
+                        <button type="button" wire:click="addVariant" class="bg-blue-500 text-white px-4 py-2 rounded">Add Variant</button>
+                    </div>
+                </div>    
+            </div>    
             <!-- Image -->
             <div class="col-span-2 md:col-span-1">
                 <label class="block">
@@ -135,9 +139,56 @@
                         class="custom-button">
                     {{ $isEditing ? 'Update Product' : 'Add Product' }}
                 </button>
-            </div>
-                        
+            </div>                        
         </form>
-        
+
+        @if($isEditing && !empty($variants))
+            @if (session()->has('variant_success_message'))
+                <div class="bg-green-500 text-white mb-4">
+                    <label>
+                    {{ session('variant_success_message') }}
+                    </label>
+                </div>
+            @endif
+            <h5 class="text-2xl font-bold">  {{  'Update Variants' }}</h1>
+                    {{-- <div class="grid grid-cols-2 gap-6 mb-6 border-2 p-1  rounded-lg" style="border-color:rgb(121, 116, 116)"> --}}
+            <div class="grid grid-cols-2 gap-6 mb-6 border-separate border-opacity-10 border-div border-div-inner">
+                @foreach($variants as $index => $variant)
+                    <div class="col-span-2  md:col-span-1 border-r-2 border-dashed border-r-emerald-50  border-div " >
+                        <h6 class="text-2xl font-bold">Variant {{ $index + 1 }}</h6>
+                        <div class="col-span-2 md:col-span-1">
+                            <label for="variant_name" class="block text-sm font-medium text-gray-700">Variant Name:</label>
+                            <input type="text" wire:model="variants.{{ $index }}.variant_name" class="p-2 border rounded">
+                        </div>
+                        <div class="col-span-2 md:col-span-1">
+                            <label for="variant_value" class="block text-sm font-medium text-gray-700">Variant Value:</label>
+                            <input type="text" wire:model="variants.{{ $index }}.variant_value" class="p-2 border rounded">
+                        </div>
+                        <div class="col-span-2 md:col-span-1">
+                            <label for="variant_price" class="block text-sm font-medium text-gray-700">Variant Price:</label>
+                            <input type="text" wire:model="variants.{{ $index }}.price" class="p-2 border rounded">
+                        </div>
+                        <div class="col-span-2 md:col-span-1">
+                            <label for="variant_stock" class="block text-sm font-medium text-gray-700">Variant Stock:</label>
+                            <input type="number" wire:model="variants.{{ $index }}.stock" class="p-2 border rounded">
+                        </div>
+                        <div class="col-span-2 grid grid-cols-2 border-div">
+                            <!-- Disable Variant Option -->
+                            <label for="is_disabled" class="block text-sm font-medium text-gray-700">Disable Variant:</label>
+                            <input type="checkbox" wire:model="variants.{{ $index }}.is_disabled" 
+                                @if($variant['is_disabled']) checked @endif
+                            class="p-2 border rounded">
+                            {{-- @if($variantHasOrders)
+                                <span class="text-sm text-red-500">This variant has been ordered and cannot be disabled.</span>
+                            @endif --}}
+                        </div>
+                        <div class="col-span-2 md:col-span-1" @style('padding-top:8px')>
+                            <button type="button" wire:click="updateVariant({{ $index }} )" class="bg-blue-500 text-white px-4 py-2 rounded">Update Variant</button>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
     </div>
 </div>
