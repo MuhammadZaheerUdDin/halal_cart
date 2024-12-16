@@ -1,0 +1,103 @@
+input ,textarea{
+    border: 0.001px solid #e5dfdf; /* Subtle border color */
+    border-radius: 15px !important; /* Rounded corners */
+    padding: 10px; /* Padding for better spacing */
+    width: 100%; /* Optional: Full width */
+    box-sizing: border-box; /* Prevent overflow due to padding */
+    background-color: #fff; /* Ensure background is white */
+    outline: none; /* Remove outline on focus */
+    font-size: 14px; /* Adjust font size */
+}
+
+/* Focus state for inputs */
+input:focus {
+    border-color: #bcbcbc; /* Slightly darker border on focus */
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+/* Styles for labels */
+label {
+    font-size: 14px; /* Standard font size */
+    color: #333; /* Neutral text color */
+    margin-bottom: 5px; /* Space below the label */
+    display: block; /* Make labels block elements */
+}
+
+.border-div{
+    margin-top: 2%;
+    background-color: #fff; /* White background */
+    border: 0.001px solid  #e5dfdf; /* Solid black border */
+    border-radius: 15px; /* Soft rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    padding: 20px; /* Internal padding */
+    text-align: center; /* Center text inside */
+}
+
+.border-rad-1{
+    border: 0.001px solid  #e5dfdf; /* Solid black border */
+    border-radius: 15px !important; /* Soft rounded corners */
+}
+/* Custom button styling */
+.custom-button {
+    background: linear-gradient(to right, #4a90e2, #0061f2); /* Gradient background */
+    color: #fff; /* White text */
+    padding: 10px 20px; /* Adjust padding */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 16px; /* Adjust font size */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+/* Hover effect */
+.custom-button:hover {
+    background: linear-gradient(to right, #0061f2, #0038a7); /* Darker gradient on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Focus effect */
+.custom-button:focus {
+    outline: none; /* Remove focus outline */
+    box-shadow: 0 0 10px rgba(0, 97, 242, 0.5); /* Focus ring */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.object-cover {
+    object-fit: cover;
+}
+
+.file\:bg-violet-50 {
+    background-color: #f5f3ff;
+}
+
+.file\:text-violet-700 {
+    color: #6d28d9;
+}
+
+.hover\:file\:bg-violet-100:hover {
+    background-color: #ede9fe;
+}

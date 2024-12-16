@@ -1,0 +1,8 @@
+.border-div{
+    background-color: #fff; /* White background */
+    border: 0.001px solid  #e5dfdf; /* Solid black border */
+    border-radius: 15px; /* Soft rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    padding: 20px; /* Internal padding */
+    text-align: center; /* Center text inside */
+}

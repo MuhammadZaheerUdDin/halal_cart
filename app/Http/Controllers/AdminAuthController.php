@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateAdminRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\Layout;
 
 class AdminAuthController extends Controller
 {
@@ -21,7 +22,7 @@ class AdminAuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('admin.admin_login');
+        return view('admin.admin_login')->layout('layouts.app'); 
     }
 
     public function login(Request $request)

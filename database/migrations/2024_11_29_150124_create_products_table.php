@@ -20,6 +20,28 @@ return new class extends Migration
             $table->string('sku')->unique();
             $table->string('image')->nullable();
             $table->integer('category_id');
+            $table->json('subcategories')->nullable();
+            $table->tinyInteger('stock_status')->default(true);
+            $table->tinyInteger('status')->default(true);
+            //new lines added
+            $table->string('code');
+            $table->string('slug');
+            $table->integer('brand_id')->nullable();
+            $table->string('meta_title')->nullable();
+            $table->string('meta_description')->nullable();
+            $table->string('meta_keywords')->nullable();
+            $table->tinyInteger('featured')->default(false);
+            $table->tinyInteger('hot')->default(false);
+            $table->tinyInteger('best')->default(false);
+            $table->tinyInteger('top')->default(false);
+            $table->tinyInteger('latest')->default(false);
+            $table->tinyInteger('big')->default(false);
+            $table->tinyInteger('trending')->default(false);
+            $table->tinyInteger('sale')->default(false);
+            $table->tinyInteger('is_discount')->default(false);
+            $table->tinyInteger('discount_amount')->default(false);
+            $table->date('discount_date')->nullable();
+
             $table->timestamps();
         });
     }
