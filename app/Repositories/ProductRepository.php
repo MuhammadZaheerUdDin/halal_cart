@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Product;
+use App\Models\ProductVariant;
 
 class ProductRepository
 {
@@ -63,6 +64,33 @@ class ProductRepository
     }
 
     /**
+     * Update a product by ID.
+     */
+    public function updateOrderQuantity($product_id , $variant_id, $quantity)
+    {
+        $product = Product::findOrFail($product_id);
+        if($product)
+        {
+            $product->stock =- $quantity;
+            $p = $product->save();
+            if(!empty($p))
+            {
+                $product_variant = ProductVariant::where('id', $variant_id)
+                ->where('product_id', $product_id)
+                ->firstOrFail();
+                if ($product_variant->stock < $quantity) {
+                    $product_variant->stock -= $quantity;
+                    $p_v = $product_variant->save();
+                    if($p_v){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Delete a product by ID.
      */
     public function delete($id)
@@ -71,5 +99,16 @@ class ProductRepository
         $product->delete();
 
         return true;
+    }
+
+    public function getQuantity($variant_id){
+        $variant = ProductVariant::find($variant_id);
+
+        if ($variant) {
+            return $variant->quantity; // Assuming 'stock' represents available quantity
+        } else {
+            return 0;
+            //$this->maxQuantity = 0; // No stock if variant not found
+        }
     }
 }

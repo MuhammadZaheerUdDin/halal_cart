@@ -30,9 +30,9 @@
                 <div class="col-md-6">
                             
                     <div class="image-gallery">
-                        <div class="row">
+                        <div class="d-flex">
 
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-3 col-4">
                                 <div class="thumbnail" onclick="changeImage('{{ asset('storage/' . $product->image) }}')">
                                     <img src="{{ asset('storage/'.$product->image) }}" alt="Thumbnail 1">
                                 </div>
@@ -46,10 +46,10 @@
                                     @endforeach
                                 @endif
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-9 col-sm-9 col-8">
                                 <div class="main-image">
                                     {{-- <img id="mainImg" src="assets/imgs/p17-300x300.jpg" alt="Halal Boneless Meat"> --}}
-                                    <img id="mainImg" src="{{ asset('storage/'.$product->image) }}" alt="Halal Boneless Meat">
+                                    <img id="mainImg" src="{{ asset('storage/'.$product->image) }}" alt="Halal Boneless Meat" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -70,32 +70,27 @@
                             <button 
                                 wire:click="selectedVariant('{{ $variant->id }}')" 
                                 class="{{ $selected_variant == $variant->id ? 'active' : '' }}">
-                                {{ $variant->variant_value }}
+                                {{ $variant->variant_value }}{{ $variant->variant_name }}
                             </button>
                         @endforeach
-                        {{-- <button onclick="selectWeight(this)">1lb</button>
-                        <button onclick="selectWeight(this)">2lbs</button>
-                        <button onclick="selectWeight(this)">3lbs</button>
-                        <button onclick="selectWeight(this)">4lbs</button> --}}
                       </div>
                       <div class="description">
-                        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar. 
+                        {{-- Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.  --}}
+                        {{ $product->description }}
                       </div>
                       <div class="row">
-                          <div class="col-md-4">
+                          <div class="col-md-4 col-sm-4">
                               <div class="quantity">
                                 <button wire:click="updateQuantity(-1)">-</button>
-                                <input id="quantity" type="text" value="{{ $quantity }}">
+                                <input id="quantity" type="text" value="{{ $quantity }}" disabled>
                                 <button wire:click="updateQuantity(1)">+</button>
                               </div>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-5 col-sm-5 mt-2">
                               <button class="add-to-cart" wire:click="addToCart">Add to Cart <i class="fa-solid fa-bag-shopping"></i></button>
                           </div>
-                          <div class="col-md-2">
-                              <div class="social-icons">
-                                <i class="fa-regular fa-heart"></i>
-                              </div>
+                          <div class="col-md-3 col-sm-3 text-center mt-2 payout-btn">
+                            <a href="payout" class="text-dark" id="">Payout</a>
                           </div>
                       </div>
                     </div>

@@ -187,6 +187,12 @@ class CheckoutComponent extends Component
                 $price = $cart->variant->price;
                 $product_total_price = (float)$price*(int)$quantity;
                 $t_price +=$product_total_price;
+                $product_update_quantity = $this->productRepository->updateOrderQuantity($cart->itemable_id,$cart->variant->id,$cart->quantity);
+                if(!$product_update_quantity){
+                    DB::rollBack();
+                    session()->flash('error', 'Payment failed.');
+                    return redirect()->back()->with(['error'=>'Something went wrong.']);
+                }
             }
             $charge = Stripe\Charge::create ([
                 "amount" => $t_price*100 ,
@@ -230,7 +236,7 @@ class CheckoutComponent extends Component
                 $this->cartRepository->clearCart($cart);
     
                 DB::commit();
-                return redirect()->to('success')->with(['success'=>'Payment did not complete successfully.']);
+                return redirect()->to('orders')->with(['success'=>'Payment did not complete successfully.']);
                 // session()->flash('message', 'Product added to cart successfully.');
             } else {
                 DB::rollBack();

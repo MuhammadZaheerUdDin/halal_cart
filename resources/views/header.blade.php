@@ -20,7 +20,7 @@
                 <!-- Right Section (Icons like User, Cart) -->
                 <div class="col-md-4 col-lg-4 col-sm-3 col-xs-3 d-flex justify-content-end">
                     <div class="nav-icons">
-                        <a href="#"><i class="fas fa-user"></i></a>
+                        <a href="{{ url('/login') }}"><i class="fas fa-user"></i></a>
                         <a href="#" id="openMenuBtn"><i class="fas fa-shopping-cart"></i></a>
                     </div>
                 </div>

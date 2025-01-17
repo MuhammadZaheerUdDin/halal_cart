@@ -16,6 +16,7 @@ class AddToCartModalComponent extends Component
     protected $listeners = ['openAddToCartModal'];
     public $selectedWeight;
     public $selected_variant;
+    private $max_quantity = 0;
     private $cartRepository;
     private $productRepository;
     /**
@@ -26,6 +27,7 @@ class AddToCartModalComponent extends Component
         $this->cartRepository = app(CartRepository::class); // Resolve repository instance
         $this->productRepository = app(ProductRepository::class); // Resolve the repository
     }
+
     public function mount(){
         // if(!empty($this->product->variants)){
             // $this->selectedWeight = $this->product->variants->first()->id ?? null; // Set the first variant as default
@@ -49,6 +51,7 @@ class AddToCartModalComponent extends Component
             }
         }
     }
+
     public function closeModal()
     {
         $this->isOpen = false;
@@ -57,7 +60,12 @@ class AddToCartModalComponent extends Component
     public function selectedVariant($variant_id)
     {
         $this->selected_variant = $variant_id;
+        $max_quantity = $this->productRepository->getQuantity($variant_id);
+        if($max_quantity>0){
+            $this->max_quantity = $max_quantity;
+        }
     }
+    
     public function updateQuantity($quantity)
     {
         if($this->selected_variant!=''){

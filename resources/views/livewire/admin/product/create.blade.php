@@ -109,10 +109,10 @@
                     <h3 class="font-bold mb-2">Add Variants</h3>
                 </div>
                 <div class="col-span-2 md:col-span-1 p-1">
-                    <input type="text" wire:model="variant_name" placeholder="Variant Name (e.g., Size)" class="p-2 border rounded mb-2">
+                    <input type="text" wire:model="variant_name" placeholder="Variant Name (e.g., lbs)" class="p-2 border rounded mb-2">
                 </div>
                 <div class="col-span-2 md:col-span-1 p-1">
-                    <input type="text" wire:model="variant_value" placeholder="Variant Value (e.g., Large)" class="p-2 border rounded mb-2">
+                    <input type="text" wire:model="variant_value" placeholder="Variant Value (e.g., 1,2,3)" class="p-2 border rounded mb-2">
                 </div>
                 <div class="col-span-2 md:col-span-1 p-1">
                     <input type="number" wire:model="variant_price" placeholder="Price Adjustment (if not place '0')" class="p-2 border rounded mb-2">
