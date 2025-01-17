@@ -75,7 +75,6 @@
                         @endforeach
                       </div>
                       <div class="description">
-                        {{-- Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.  --}}
                         {{ $product->description }}
                       </div>
                       <div class="row">
