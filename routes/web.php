@@ -1,15 +1,22 @@
 <?php
 
+use App\Livewire\ProductCategoriesComponent;
 use App\Livewire\ProductComponent;
 use App\Livewire\Admin\ProductComponent as AdminProductComponent;
 // use App\Livewire\Admin\CategoryComponent as AdminCategoryComponent;
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\User\StripePaymentController;
 use App\Livewire\Admin\Category\CategoryComponent as AdminCategoryComponent;
 use App\Livewire\Admin\Category\SubCategoryComponent as AdminSubCategoryComponent;
 use App\Livewire\Admin\Product\Create as AdminProductCreateCompoment;
+use App\Livewire\CartComponent;
+use App\Livewire\User\CheckoutComponent;
+use App\Livewire\ProductDetailComponent;
 use App\Livewire\User\HomeComponent;
 use App\Models\Category;
+
+// use App\Livewire\CartComponent;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,6 +56,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/subcategories',AdminSubCategoryComponent::class)->name('admin.subcategories');
     });
 });
+
+Route::get('/categories/{encrypted}', ProductCategoriesComponent::class)->name('categories.show');
+Route::get('/products/{slug}', ProductDetailComponent::class)->name('products.show');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -60,7 +71,14 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/products',ProductComponent::class);
+    Route::get('/cart', CartComponent::class)->name('cart');
+    Route::get('/checkout', CheckoutComponent::class)->name('checkout');
+    Route::post('checkout/payment', [CheckoutComponent::class,'checkout'])->name('checkout.payment');
 
+    // Route::controller(StripePaymentController::class)->group(function(){
+    //     // Route::get('stripe', 'stripe');
+    //     Route::post('stripe', 'stripePost')->name('stripe.post');
+    // });
 
 });
 

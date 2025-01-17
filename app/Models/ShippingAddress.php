@@ -10,7 +10,7 @@ class ShippingAddress extends Model
     /** @use HasFactory<\Database\Factories\ShippingAddressFactory> */
     use HasFactory;
     
-    protected $fillable = ['user_id', 'address_line_1', 'address_line_2', 'city', 'state', 'postal_code', 'country'];
+    protected $fillable = ['user_id' , 'first_name' , 'last_name' ,'email' ,'phone_number' ,'address1', 'address2','country', 'city', 'state', 'postal_code', 'country'];
 
     public function user()
     {

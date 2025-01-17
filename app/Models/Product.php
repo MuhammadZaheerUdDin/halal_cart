@@ -4,13 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
     
-    protected $fillable = ['name', 'description', 'price', 'stock', 'sku', 'image', 'category_id'];
+    protected $fillable = ['name', 'description', 'price', 'stock', 'sku', 'image', 'category_id','subcategory_id'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($product) {
+            $product->slug = Str::slug($product->name);
+
+            // Ensure uniqueness if needed
+            $count = static::where('slug', 'LIKE', "{$product->slug}%")->count();
+            if ($count > 0) {
+                $product->slug .= '-' . ($count + 1);
+            }
+        });
+    }
 
     public function category()
     {

@@ -20,11 +20,11 @@ return new class extends Migration
             $table->string('sku')->unique();
             $table->string('image')->nullable();
             $table->integer('category_id');
-            $table->json('subcategories')->nullable();
+            $table->json('subcategory_id');//->nullable();
             $table->tinyInteger('stock_status')->default(true);
             $table->tinyInteger('status')->default(true);
             //new lines added
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->string('slug');
             $table->integer('brand_id')->nullable();
             $table->string('meta_title')->nullable();

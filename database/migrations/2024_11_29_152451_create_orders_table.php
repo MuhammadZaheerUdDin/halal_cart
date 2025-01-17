@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('total');
+            $table->string('address');
             $table->string('status')->default('pending'); // pending, completed, cancelled
+            $table->string('is_paid');
             $table->timestamps();
         });
     }

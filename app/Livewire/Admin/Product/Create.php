@@ -16,7 +16,7 @@ class Create extends Component
     use WithFileUploads;
 
     public $products, $variants = [], $images = [], $previewImages = [];
-    public $name, $description, $price, $stock, $sku, $category_id, $is_disabled, $image, $productId, $categories, $subcategories;
+    public $name, $description, $price, $stock, $sku, $category_id, $subcategory_id, $is_disabled, $image, $productId, $categories, $subcategories;
     
     public $variant_name
     ,$variant_value
@@ -44,8 +44,10 @@ class Create extends Component
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'sku' => 'required|string|max:100|unique:products,sku' . ($this->productId ? ",$this->productId" : ''),
-            'category_id' => 'required|integer|exists:categories,id',
+            // 'category_id' => 'required|integer|exists:categories,id',
+            'subcategory_id' => 'required|integer|exists:sub_categories,id',
             'images.*' => 'image|max:2048', // Image validation
+            'image' => 'nullable|max:2048', // 2MB max
         ];
     }
 
@@ -63,6 +65,7 @@ class Create extends Component
             // $this->loadProduct();
         } else {
             $this->categories = Category::all();
+            // $this->category_id = $this->categories->id;
             $this->subcategories = SubCategory::all();
         }
     }
@@ -94,15 +97,18 @@ class Create extends Component
         // if ($this->image) {
         //     $imagePath = $this->image->store('products', 'public');
         // }
-
+        // dd($this->subcategory_id);
+        $filename = time() . '_' . uniqid() . '.' . $this->image->getClientOriginalExtension();
+        $product_image_path = $this->image->storeAs('product_images', $filename, 'public');
         $product = Product::create([
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,
             'stock' => $this->stock,
             'sku' => $this->sku,
-            'category_id' => $this->category_id,
-            'image' => $imagePath ?? null,
+            'category_id' => $this->categories->id,//$this->category_id,
+            'subcategory_id' => $this->subcategory_id,
+            'image' => $product_image_path//$imagePath ?? null,
         ]);
 
         // Save Variants
@@ -186,18 +192,18 @@ class Create extends Component
         ]);
 
         // Update variants
-        foreach ($this->variants as $variant) {
-            ProductVariant::updateOrCreate(
-                ['id' => $variant['id'] ?? null], 
-                [
-                    'product_id' => $product->id,
-                    'variant_name' => $variant['name'],
-                    'variant_value' => $variant['value'],
-                    'price' => $variant['price'],
-                    'stock' => $variant['stock'],
-                ]
-            );
-        }        
+        // foreach ($this->variants as $variant) {
+        //     ProductVariant::updateOrCreate(
+        //         ['id' => $variant['id'] ?? null], 
+        //         [
+        //             'product_id' => $product->id,
+        //             'variant_name' => $variant['name'],
+        //             'variant_value' => $variant['value'],
+        //             'price' => $variant['price'],
+        //             'stock' => $variant['stock'],
+        //         ]
+        //     );
+        // }        
 
         // Update images
         foreach ($this->images as $image) {

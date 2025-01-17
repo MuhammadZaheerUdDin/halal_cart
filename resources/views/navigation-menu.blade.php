@@ -1,4 +1,50 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<header class="header-area">
+    <div class="custom-container">
+        <div class="custom-row align-items-center justify-content-between">
+            <div class="header-left d-flex align-items-center">
+                <!-- Navbar Section -->
+                <nav class="navbar-wrapper w-1000">
+                    <span class="close-menu-bar">
+                        <i class="las la-times"></i>
+                    </span>
+                    <ul class="d-flex justify-content-between w-100">
+                        <li class="nav-item dropdown main-navbar">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                                Management
+                            </a>
+                            <ul class="dropdown-menu main-menu shadow">
+                                <li><a class="nav-link" href="payments-01.html">Business Payments</a></li>
+                                <li><a class="nav-link" href="business-account.html">Business Account</a></li>
+                                <li><a class="nav-link" href="corporate-card.html">Corporate Card</a></li>
+                                <li><a class="nav-link" href="expense-management.html">Expense Management</a></li>
+                                <li><a class="nav-link" href="budgeting-and-analytics.html">Budgeting</a></li>
+                                <li><a class="nav-link" href="integrations.html">Integrations</a></li>
+                                <li><a class="nav-link" href="invoice-management.html">Invoice</a></li>
+                                <li><a class="nav-link" href="security.html">Security</a></li>
+                                <li><a class="nav-link" href="rewards.html">Rewards</a></li>
+                                <li><a class="nav-link" href="fees.html">Fees</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Poultry</a></li>
+                        <li>
+                            <a href="#">Meat</a>
+                            <ul>
+                                <li><a href="#">Cart</a></li>
+                                <li><a href="#">Checkout Process</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Meat Kits</a></li>
+                        <li><a href="#">Frozen Products</a></li>
+                        <li><a href="#">Health & Wellness</a></li>
+                        <li><a href="#">Drinks</a></li>
+                        <li><a href="#">Halal Box</a></li>
+                    </ul><hr class="hr-line">
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+{{-- <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -216,4 +262,4 @@
             </div>
         </div>
     </div>
-</nav>
+</nav> --}}

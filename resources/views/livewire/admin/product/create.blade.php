@@ -31,7 +31,7 @@
             <div class="col-span-2">
                 <div class="col-span-4 md:col-span-2">
                     <label for="description" class="block text-sm font-medium text-gray-700">Halal Categories:</label>
-                    <select wire:model="category_id" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                    <select wire:model="subcategory_id" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                         <option value="">Select Sub-Category</option>
                         @foreach($subcategories as $sub)
                             <option value="{{ $sub->id }}">{{ $sub->name }}</option>
@@ -75,6 +75,25 @@
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>        
+            <!-- Image -->
+            <div class="col-span-2 md:col-span-1">
+                <label class="block">
+                    <span class="sr-only">Choose Product Image</span>
+                    <input type="file" id="" wire:model="image"  class="block w-full text-sm text-slate-500
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-full file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-violet-50 file:text-violet-700
+                        hover:file:bg-violet-100
+                    " />
+                </label>
+                @error('image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+               <!-- error('image') 
+                    <span class="text-red-500 text-sm">{ { $message }}</span>
+                enderror
+                 -->
+            </div>
+
                 <!-- Description -->
             <div class="col-span-2 md:col-span-1">
                 <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
@@ -105,10 +124,10 @@
                     </div>
                 </div>    
             </div>    
-            <!-- Image -->
+            <!-- Images -->
             <div class="col-span-2 md:col-span-1">
                 <label class="block">
-                    <span class="sr-only">Choose Product Image</span>
+                    <span class="sr-only">Upload Product Image's (*)</span>
                     <input type="file" id="images" wire:model="images"  class="block w-full text-sm text-slate-500
                         file:mr-4 file:py-2 file:px-4
                         file:rounded-full file:border-0

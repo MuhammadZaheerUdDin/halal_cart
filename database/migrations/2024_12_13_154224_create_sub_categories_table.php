@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('category_id'); // Foreign key for categories
             $table->string('name'); // Subcategory name
+            $table->string('slug'); // Subcategory slug
             $table->text('description')->nullable(); // Optional description
             $table->timestamps();
         });
