@@ -145,27 +145,9 @@
                                                     @error('country')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-                                                </div>
-                                                {{-- <div class="input-group">
-                                                    <label for="last_name">postal Code</label>
-                                                    <input type="text" id="postal_code" wire.model="postal_code" placeholder="Postal Code" />
-                                                </div> --}}
+                                                </div>                                            
                                             </div>
-                                            {{-- <div class="input-row">
-                                                <div class="input-group input-checkbox">
-                                                    <input type="checkbox" id="privacy_policy_accept" wire:model="privacy_policy_accept">
-                                                    <label for="privacy_policy_accept">Ship to a different address</label>
-                                                </div>
-                                            </div> --}}
                                             <hr>
-                                            {{-- <h8 class="section-title">Additional Info</h8>
-                                            <div class="input-row">
-                                                <div class="input-group">
-                                                    <label for="message">Order Notes (Optional)</label>
-                                                    <textarea wire:model="message" id="message"
-                                                        placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
-                                                </div>
-                                            </div> --}}
                                             <div class="input-row">
                                                 <div class="input-group">
                                                     {{-- <button id="submit" class="theme-btn">Pay Now</button> --}}
@@ -229,7 +211,7 @@
                 
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <img src="{{ asset('storage/'.$cart_item->product->image) }}">
+                                        <img src="{{ asset('storage/'.$cart_item->product->image) }}"  class="checkout-img">
                                     </div>
                                     <div class="col-md-5">
                                         <span>{{ $cart_item->product->name }}</span>
@@ -249,7 +231,7 @@
                                     <span>Subtotal :</span>
                                 </div>
                                 <div class="col-md-6" align="right">
-                                    <span>${{ $cart->sum('total') }}</span>
+                                    <span>$ @if(empty($cart)){{ '0' }} @else{{ $cart->sum('total') }} @endif</span> 
                                 </div>
                             </div><hr>
                             <div class="row">
@@ -265,7 +247,7 @@
                                     <b>Total :</b>
                                 </div>
                                 <div class="col-md-6" align="right">
-                                    <b>{{ sum($cart_item->total) }}</b>
+                                    {{-- <b>$ @if(empty($cart)){{ '0' }} @else{{ sum($cart_item->total) }} @endif</b>  --}}
                                 </div>
                             </div>
                         </div>

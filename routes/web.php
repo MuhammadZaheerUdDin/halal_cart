@@ -14,6 +14,7 @@ use App\Livewire\CartComponent;
 use App\Livewire\User\CheckoutComponent;
 use App\Livewire\ProductDetailComponent;
 use App\Livewire\User\HomeComponent;
+use App\Livewire\User\OrderComponent;
 use App\Models\Category;
 
 // use App\Livewire\CartComponent;
@@ -75,10 +76,7 @@ Route::middleware([
     Route::get('/checkout', CheckoutComponent::class)->name('checkout');
     Route::post('checkout/payment', [CheckoutComponent::class,'checkout'])->name('checkout.payment');
 
-    // Route::controller(StripePaymentController::class)->group(function(){
-    //     // Route::get('stripe', 'stripe');
-    //     Route::post('stripe', 'stripePost')->name('stripe.post');
-    // });
+    Route::get('/orders', OrderComponent::class)->name('orders');
 
 });
 

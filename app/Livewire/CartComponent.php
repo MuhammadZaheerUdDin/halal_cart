@@ -37,4 +37,13 @@ class CartComponent extends Component
         // dd('za');
         return view('livewire.user.cart-component',compact('cart'))->layout('layouts.app');
     }
+    public function remove($cart_id){
+         // Remove the item from the cart using its ID
+        $cartItem = $this->cartRepository->removeItem($cart_id);
+        if ($cartItem) {
+            session()->flash('message', 'Item removed Successfully !');
+        } else {
+            session()->flash('error', 'Item not found!');
+        }
+    }
 }

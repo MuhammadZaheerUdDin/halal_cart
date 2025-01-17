@@ -60,7 +60,7 @@
                                 <h3>Fresh Boneless Meat</h3>
                                 <p>{{$item->variant->variant_name}}{{$item->variant->variant_value}} x <span class="price">{{$item->quantity}}</span></p>
                             </div>
-                            <button class="close-btn">&times;</button>
+                            <button class="close-btn" wire:click="remove({{ $item->id }})">&times;</button>
                         </div>
                     </div>
                 @if ($index % 3 === 2 || $item->last)
@@ -79,11 +79,9 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
-                        <button class="checkout-btn">Checkout</button>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
-                        <button class="go-to-cart-btn">Go To Cart</button>
-                    </div>
+                        <a href="{{ route('checkout') }}" class="btn checkout-btn">Checkout</a>
+                        {{-- <button class="checkout-btn">Checkout</button> --}}
+                    </div>                
                 </div>
             </div>
             </div>

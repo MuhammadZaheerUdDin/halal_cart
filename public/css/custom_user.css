@@ -254,3 +254,10 @@ background-color: #0056b3;
     color: #313131;
     font-size: 15px;
 }
+
+.checkout-img {
+    height: 50px;
+    width: 80px;
+    border-radius: 10px;
+    padding-bottom: 4px;
+}

@@ -20,8 +20,11 @@ class CartRepository
     {
         
     }
-    public function getOrCreateCart($user_id)
+    public function getOrCreateCart($user_id = null)
     {
+        if(empty($user_id)){
+            $user_id = Auth::user()->id;
+        }
         return Cart::query()->firstOrCreate(['user_id' => $user_id]);
     }
 
@@ -53,8 +56,11 @@ class CartRepository
     /**
      * Remove an item from the cart.
      */
-    public function removeItem($cart, $itemId)
+    public function removeItem($itemId,$cart=null)
     {
+        if(empty($cart)){
+            $cart = $this->getOrCreateCart();
+        }
         return $cart->items()->where('id', $itemId)->delete();
     }
 
