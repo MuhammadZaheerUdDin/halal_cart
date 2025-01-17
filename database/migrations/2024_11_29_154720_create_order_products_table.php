@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('order_id');
             $table->integer('product_id');
             $table->integer('variant_id');
+            $table->longText('variant_metadata');
             $table->integer('quantity');
             $table->string('price');
             $table->timestamps();
