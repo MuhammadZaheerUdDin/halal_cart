@@ -83,15 +83,16 @@
                                 <!-- Product Card -->
                                 <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
                                     <div class="post-slide">
+                                        <div class="post-content">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="product-title">{{ $order->product->name }} | {{ $order->variant->variant_name }}  {{ $order->variant->value }}</p>
+                                                    <p class="product-price">{{"Price: ".$order->price }} / {{ "Quantity :".$order->quantity }}
+                                                    </p></div>
+                                            </div>
+                                        </div>
                                         <div class="post-img" style="width:200px; height:100px">
                                             <img src="{{ asset('storage/'.$order->product->image) }}"  class="checkout-img">
-                                            <a href="#" class="over-layer" id="filterButton"><i class="fa">Add to Cart</i></a>
-                                        </div>
-                                        <div class="post-content">
-                                            <p class="product-title">{{ $order->product->name }} | Approx. {{ $order->variant->variant_name }}  {{ $order->variant->value }} Chicken |...</p>
-                                            <div class="row">
-                                                <div class="col-md-6"><p class="product-price">{{"Price: ".$order->price }} / {{ "Quantity :".$order->quantity }}</p></div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

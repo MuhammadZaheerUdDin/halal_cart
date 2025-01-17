@@ -181,7 +181,9 @@ class CheckoutComponent extends Component
                 $order_item[] = [ 'order_id' => 0, // Placeholder, will be updated after order creation
                 'product_id' => $cart->itemable_id,
                 'quantity' => $cart->quantity,
-                'price' => $cart->variant->price
+                'price' => $cart->variant->price,
+                'variant_id' => $cart->variant_id,
+                'variant_metadata' => $cart->variant_metadata,
                 ];
                 $quantity = $cart->quantity;
                 $price = $cart->variant->price;
