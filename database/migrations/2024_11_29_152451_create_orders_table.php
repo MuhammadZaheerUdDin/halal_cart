@@ -14,8 +14,18 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('total');
-            $table->string('address');
+            $table->string('total');           
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->string('phone_number');
+            $table->string('address1');
+            $table->string('address2');
+            $table->string('country');
+            $table->string('city');
+            $table->string('state');
+            $table->string('postal_code');
+            $table->string('country');
             $table->string('status')->default('pending'); // pending, completed, cancelled
             $table->string('is_paid');
             $table->timestamps();
