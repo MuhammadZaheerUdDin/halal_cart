@@ -78,7 +78,7 @@ class ProductRepository
                 $product_variant = ProductVariant::where('id', $variant_id)
                 ->where('product_id', $product_id)
                 ->firstOrFail();
-                if ($product_variant->stock < $quantity) {
+                if ($product_variant->stock >= $quantity) {
                     $product_variant->stock -= $quantity;
                     $p_v = $product_variant->save();
                     if($p_v){
