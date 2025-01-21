@@ -8326,3 +8326,19 @@ span.right{
     font-size: 15px;
     border-radius: 3px;
 }
+.suc {
+    font-size: 15px;
+    color: #145000;
+    font-weight: bold;
+    margin-left: 39px;
+}
+.Cancl {
+    font-size: 15px;
+    color: #c10000;
+    font-weight: bold;
+    margin-left: 39px;
+}
+.txt-nav {
+    align-items: center;
+    justify-content: center;
+}

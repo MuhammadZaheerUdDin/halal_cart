@@ -11,7 +11,7 @@
 
                 <!-- Center Section (Logo) -->
                 <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6 d-flex justify-content-end">
-                    <a href="index.html" class="logo mt-1">
+                    <a href="{{ url('/') }}" class="logo mt-1">
                         {{-- <img src="assets/imgs/meet-logo.png" alt="Client Logo" width="35%" /> --}}
                         <img src="{{ asset('assets/imgs/meet-logo.png') }}" alt="Client Logo" width="35%" />
                     </a>
@@ -35,14 +35,16 @@
         </div>
         <nav class="navbar-wrapper">
             <button class="close-nav" id="closeNav">&times;</button>
-            <ul>
-                <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Poultry</a></li>
+            @livewire('user.header-menu')
+            {{-- <ul> --}}
+                {{-- <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Poultry</a></li>
                 <li><a href="{{ route('categories.show', Crypt::encrypt("Meal_Kits")) }}">Meat Kits</a></li>
                 <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Frozen Products</a></li>
                 <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Health & Wellness</a></li>
                 <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Drinks</a></li>
-                <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Halal Box</a></li>
-            </ul>
+                <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Halal Box</a></li> --}}
+
+            {{-- </ul> --}}
         </nav>
 
     </div>

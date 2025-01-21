@@ -5,17 +5,20 @@ namespace App\Livewire\Admin\Category;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class SubCategoryComponent extends Component
 {
+    use WithFileUploads;
     public $subcategories, $categories;
-    public $name, $description, $category_id, $subcategoryId;
+    public $name, $description, $category_id, $subcategoryId ,$image;
     public $isEditing = false;
 
     protected $rules = [
         'name' => 'required|string|max:255',
         'description' => 'nullable|string',
         'category_id' => 'required|exists:categories,id',
+        'image' => 'nullable',
     ];
 
     public function mount()
@@ -32,14 +35,20 @@ class SubCategoryComponent extends Component
     public function createSubcategory()
     {
         $this->validate();
-
+        $product_image_path = '';
+        if(!empty($this->image)){
+            $filename = time() . '_' . uniqid() . '.' . $this->image->getClientOriginalExtension();
+            $product_image_path = $this->image->storeAs('sub_category_images', $filename, 'public');
+        }
         Subcategory::create([
             'name' => $this->name,
             'description' => $this->description,
             'category_id' => $this->category_id,
+            'image' => $product_image_path,
         ]);
 
         $this->resetForm();
+        // $this->image->store('product_images');
         $this->subcategories = Subcategory::with('category')->get();
         session()->flash('message', 'Subcategory created successfully!');
     }
@@ -51,6 +60,7 @@ class SubCategoryComponent extends Component
         $this->name = $subcategory->name;
         $this->description = $subcategory->description;
         $this->category_id = $subcategory->category_id;
+        $this->image = null;//$subcategory->image;
         $this->isEditing = true;
     }
 
@@ -59,11 +69,21 @@ class SubCategoryComponent extends Component
         $this->validate();
 
         $subcategory = Subcategory::findOrFail($this->subcategoryId);
-        $subcategory->update([
+        $product_image_path = '';
+        if(!empty($this->image)){
+            $filename = time() . '_' . uniqid() . '.' . $this->image->getClientOriginalExtension();
+            $product_image_path = $this->image->storeAs('sub_category_images', $filename, 'public');
+        }
+
+        $sub_category = [
             'name' => $this->name,
             'description' => $this->description,
-            'category_id' => $this->category_id,
-        ]);
+            'category_id' => $this->category_id,            
+        ];
+        if (!empty($product_image_path)) {
+            $sub_category['image'] = $product_image_path;
+        }
+        $subcategory->update($sub_category);
 
         $this->resetForm();
         $this->subcategories = Subcategory::with('category')->get();
@@ -79,7 +99,7 @@ class SubCategoryComponent extends Component
 
     public function resetForm()
     {
-        $this->name = $this->description = $this->category_id = null;
+        $this->name = $this->description = $this->category_id = $this->image = null;
         $this->isEditing = false;
     }
 }

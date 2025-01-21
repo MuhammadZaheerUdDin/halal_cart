@@ -10,7 +10,7 @@ class SubCategory extends Model
 {
     /** @use HasFactory<\Database\Factories\SubCategoryFactory> */
     use HasFactory;
-    protected $fillable = ['category_id', 'name', 'slug', 'description'];
+    protected $fillable = ['category_id', 'name', 'slug', 'description', 'position', 'image'];
 
     protected static function boot()
     {

@@ -73,82 +73,29 @@
                     </div>
                 </div>
                 <!-- Carousel Container -->
+                @php
+                    $headerMenuItems = Cache::get('header_menu_items', []);
+                    $headerMenuCount = count($headerMenuItems);
+                    // Repeat items to make it at least 9
+                    while ($headerMenuCount < 9) {
+                        $headerMenuItems = array_merge($headerMenuItems, $headerMenuItems);
+                        $headerMenuCount = count($headerMenuItems);
+                    }                
+                    // Limit to exactly 9 items
+                    $headerMenuItems = array_slice($headerMenuItems, 0, 9);
+                @endphp
                 <div class="carousel">
                     <div class="carousel-track-container">
                         <ul class="carousel-track">
                             <!-- Individual Slides -->
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/remit-continental.png" alt="Poultry">
-                                    <p>Poultry</p>
-                                </div>
-                            </li>
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/meat.png" alt="Meat">
-                                    <p>Meat</p>
-                                </div>
-                            </li>
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/meal_kits.png" alt="Meal Kits">
-                                    <p>Meal Kits</p>
-                                </div>
-                            </li>
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/forzn.png" alt="Frozen Products">
-                                    <p>Frozen Products</p>
-                                </div>
-                            </li>
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/Health.png" alt="Frozen Products">
-                                    <p>Frozen Products</p>
-                                </div>
-                            </li>
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/Drinks.png" alt="Frozen Products">
-                                    <p>Frozen Products</p>
-                                </div>
-                            </li>
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/remit-continental.png" alt="Poultry">
-                                    <p>Poultry</p>
-                                </div>
-                            </li>
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/meat.png" alt="Meat">
-                                    <p>Meat</p>
-                                </div>
-                            </li>
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/meal_kits.png" alt="Meal Kits">
-                                    <p>Meal Kits</p>
-                                </div>
-                            </li>
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/forzn.png" alt="Frozen Products">
-                                    <p>Frozen Products</p>
-                                </div>
-                            </li>
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/Health.png" alt="Frozen Products">
-                                    <p>Frozen Products</p>
-                                </div>
-                            </li>
-                            <li class="carousel-slide">
-                                <div class="item">
-                                    <img src="assets/imgs/Drinks.png" alt="Frozen Products">
-                                    <p>Frozen Products</p>
-                                </div>
-                            </li>
+                            @foreach ($headerMenuItems as $header)
+                                <li class="carousel-slide">
+                                    <div class="item">
+                                        <img src="assets/imgs/remit-continental.png" alt="Poultry" loading="lazy">
+                                        <p>{{ $header['name'] }}</p>
+                                    </div>
+                                </li>
+                            @endforeach 
                         </ul>
                     </div>
                 </div>

@@ -45,6 +45,14 @@
                 @enderror
             </div>
             <div class="col-span-2 md:col-span-1">
+                <label for="image" class="block text-sm font-medium text-gray-700"> Image (Optional):</label>
+                <input type="file" id="name" style="border-radius:4px !important" wire:model="image" 
+                    class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                @error('name') 
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="col-span-2 md:col-span-1">
                 <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
                 {{-- <input type="text" id="description" wire:model="description" 
                     class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"> --}}
