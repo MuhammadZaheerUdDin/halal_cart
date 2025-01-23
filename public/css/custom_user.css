@@ -239,7 +239,7 @@ background-color: #0056b3;
     padding: 10px;
     border-radius: 65px;
     height: 42px;
-    border: 1.5px solid #800002;
+    /* border: 1.5px solid #800002; */
     width: 87%;
     font-size: 19px;
     color: #800002;
@@ -260,4 +260,8 @@ background-color: #0056b3;
     width: 80px;
     border-radius: 10px;
     padding-bottom: 4px;
+}
+.div-cusor {
+    cursor: pointer; /* Changes cursor to a hand icon */
+    transition: background-color 0.3s, color 0.3s; /* Smooth hover effects */
 }

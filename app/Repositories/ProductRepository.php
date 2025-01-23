@@ -111,4 +111,15 @@ class ProductRepository
             //$this->maxQuantity = 0; // No stock if variant not found
         }
     }
+
+    public function getRandomProducts($limit = 6)
+    {
+        // return Product::inRandomOrder()->limit($limit)->get();
+        $randomIds = Product::select('id')
+        ->inRandomOrder()
+        ->limit(6)
+        ->pluck('id');
+        return Product::whereIn('id', $randomIds)->get();        
+    }
+
 }

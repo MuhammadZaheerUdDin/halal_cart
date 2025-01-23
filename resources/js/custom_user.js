@@ -172,10 +172,10 @@ if (dots) {
     // }
     // document.addEventListener('livewire:update', () => {
     window.changeImage = function (imageUrl) {
-      alert('call');
+      // alert('call');
       const mainImage = document.getElementById('mainImg');
       if (mainImage) {
-        alert('calledd');
+        // alert('calledd');
           mainImage.src = imageUrl;//`${imageUrl}?t=${new Date().getTime()}`;
       }
     };    
@@ -188,43 +188,39 @@ if (dots) {
     const closeMenuBtn = document.getElementById('closeMenuBtn');
 
     // Function to open the menu and activate overlay
-    openMenuBtn.addEventListener('click', function () {
-      // alert('z');
-      menu.classList.add('open');
-      overlay.classList.add('active');
-    });
-
+    if(openMenuBtn){
+      openMenuBtn.addEventListener('click', function () {
+        // alert('z');
+        menu.classList.add('open');
+        overlay.classList.add('active');
+      });
+    }
     // Function to close the menu and deactivate overlay
-    closeMenuBtn.addEventListener('click', function () {
-      menu.classList.remove('open');
-      overlay.classList.remove('active');
-    });
+    if(closeMenuBtn){
+      closeMenuBtn.addEventListener('click', function () {
+        menu.classList.remove('open');
+        overlay.classList.remove('active');
+      });
+    }
 
     // Close menu if overlay is clicked
     // overlay.addEventListener('click', function () {
     //   menu.classList.remove('open');
     //   overlay.classList.remove('active');
     // });
+
+    const userIcon = document.getElementById("userIcon");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    userIcon.addEventListener("click", function (e) {
+        e.stopPropagation(); // Prevent click from propagating to document
+        dropdownMenu.classList.toggle("show");
+    });
+
+    // Close the dropdown when clicking outside
+    document.addEventListener("click", function () {
+        dropdownMenu.classList.remove("show");
+    });
+        
   });
 
-  // document.addEventListener('DOMContentLoaded', () => {
-    // const failMessage = document.getElementById('error-message');
-      // function successMessage(){
-    // Livewire.on('successMessage', () => {
-    //     const successMessage = document.getElementById('success-message');
-    //     // const target = document.getElementById('scroll-target');
-    //     alert('z');
-    //     // if (successMessage) {
-    //     successMessage.scrollIntoView({
-    //             behavior: 'smooth',
-    //             block: 'start'
-    //     });
-    //     // }
-    // });
-      // }
-    // if (failMessage && !failMessage.classList.contains('d-error')) {
-    //   failMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    //   failMessage.focus();
-    // }
-
-  // });

@@ -152,33 +152,30 @@
                         <!-- Product Card -->
                         @foreach($products as $product)
                         <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                            <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}" class="product-image">
-                                    <a href="{{ route('products.show', $product->id) }}" class="over-layer"><i class="fa"></i></a>
-                                </div>
-                                <div class="post-content">
-                                    <p class="product-title">{{ $product->name }} | {{ $product->variants[0]->variant_value ?? '1lbs' }}</p>
-                                    {{-- <button class="filter-button" wire:click="">
-                                        Add To Cart
-                                    </button> --}}
-                                    <button class="bg-blue-500 text-white px-4 py-2 rounded" 
-                                    wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])">
-                                        Add to Cart Emit
-                                    </button>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p class="product-price">${{ number_format($product->price, 2) }}</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="stars">
-                                                {{ str_repeat('★', $product->rating) }}
-                                                {{ str_repeat('☆', 5 - $product->rating) }}
-                                            </div>
+                          <div class="post-slide">
+                            <div class="post-img  div-cusor" wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])">                                    <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}" class="product-image">
+                                  {{-- <a href="{{ route('products.show', $product->id) }}" class="over-layer"><i class="fa"></i></a> --}}
+                                  <a  class="over-layer"><i class="fa fa-link">Add To Cart</i></a>
+                            </div>
+                            <div class="post-content div-cusor">
+                                <p class="product-title">{{ $product->name }} | {{ $product->variants[0]->variant_value ?? '1lbs' }}</p>
+                                {{-- <button class="bg-blue-500 text-white px-4 py-2 rounded" 
+                                wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])">
+                                    Add to Cart Emit
+                                </button> --}}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="product-price">${{ number_format($product->price, 2) }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="stars">
+                                            {{ str_repeat('★', $product->rating) }}
+                                            {{ str_repeat('☆', 5 - $product->rating) }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                          </div>
                         </div>
                         @if(($loop->iteration % 3) == 0)
                             <div class="w-100"></div>

@@ -20,7 +20,12 @@
                 <!-- Right Section (Icons like User, Cart) -->
                 <div class="col-md-4 col-lg-4 col-sm-3 col-xs-3 d-flex justify-content-end">
                     <div class="nav-icons">
-                        <a href="{{ url('/login') }}"><i class="fas fa-user"></i></a>
+                        <i class="fas fa-user dropdown-toggle" id="userIcon" role="button"></i>
+                        <ul class="dropdown-menu" id="dropdownMenu">
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="{{ url('orders') }}">Orders</a></li>
+                            <li><a href="login.html">Login</a></li>
+                        </ul>
                         <a href="#" id="openMenuBtn"><i class="fas fa-shopping-cart"></i></a>
                     </div>
                 </div>
@@ -33,18 +38,9 @@
                 </button>
             </div>
         </div>
-        <nav class="navbar-wrapper">
+        <nav class="navbar-wrapper txt-nav">
             <button class="close-nav" id="closeNav">&times;</button>
             @livewire('user.header-menu')
-            {{-- <ul> --}}
-                {{-- <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Poultry</a></li>
-                <li><a href="{{ route('categories.show', Crypt::encrypt("Meal_Kits")) }}">Meat Kits</a></li>
-                <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Frozen Products</a></li>
-                <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Health & Wellness</a></li>
-                <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Drinks</a></li>
-                <li><a href="{{ route('categories.show', Crypt::encrypt("Poultry")) }}">Halal Box</a></li> --}}
-
-            {{-- </ul> --}}
         </nav>
 
     </div>

@@ -52,5 +52,8 @@ class Product extends Model
     {
         return $this->hasMany(ProductVariant::class);
     }
-
+    public function latestVariant()
+    {
+        return $this->hasOne(ProductVariant::class)->latest();
+    }
 }

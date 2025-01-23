@@ -107,13 +107,13 @@
                                 <!-- Social Media Icons -->
                                 <div class="social-icons">
                                     <a href="#" class="icon">
-                                        <img src="assets/imgs/facebook.png" alt="Facebook" />
+                                        <img src="{{ asset('assets/imgs/facebook.png') }}" alt="Facebook" />
                                     </a>
                                     <a href="#" class="icon">
-                                        <img src="assets/imgs/youtube.png" alt="YouTube" />
+                                        <img src="{{ asset('assets/imgs/youtube.png') }}" alt="YouTube" />
                                     </a>
                                     <a href="#" class="icon">
-                                        <img src="assets/imgs/twitter.png" alt="Twitter" />
+                                        <img src="{{ asset('assets/imgs/twitter.png') }}" alt="Twitter" />
                                     </a>
                                 </div>
                             </div>

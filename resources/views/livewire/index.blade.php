@@ -59,49 +59,51 @@
             </div>
         </section>
     <!-- End 2nd sec -->
-    <!--  3d sec -->
+    <!--  3rd sec -->
         <section class="service-area">
             <div class="custom-container">
-                <div class="content-header">
-                    <h2 style="text-align: justify;">Build your plate with<br>
-                    <span style="font-size: 35px; font-family: 'Brush Script MT', cursive; color: #ffd700; ">protein</span></h2>
-                    <div class="button left mrg-700">
-                        <button id="prevBtn" class="nav-btn left-btn ">&larr;</button>
-                    </div>
-                    <div class="button right">
-                        <button id="nextBtn" class="nav-btn1 right-btn">&rarr;</button>
+                <div class="content-header container text-center py-4">
+                    <h2 class="text-justify">
+                        Build your plate with<br>
+                        <span class="d-block" style="font-size: 35px; font-family: 'Brush Script MT', cursive; color: #ffd700;">protein</span>
+                    </h2>
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <div class="button left">
+                            <button id="prevBtn" class=" nav-btn left-btn">
+                                &larr;
+                            </button>
+                        </div>
+                        <div class="button right">
+                            <button id="nextBtn" class=" nav-btn1 right-btn">
+                                &rarr;
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <!-- Carousel Container -->
-                @php
-                    $headerMenuItems = Cache::get('header_menu_items', []);
-                    $headerMenuCount = count($headerMenuItems);
-                    // Repeat items to make it at least 9
-                    while ($headerMenuCount < 9) {
-                        $headerMenuItems = array_merge($headerMenuItems, $headerMenuItems);
-                        $headerMenuCount = count($headerMenuItems);
-                    }                
-                    // Limit to exactly 9 items
-                    $headerMenuItems = array_slice($headerMenuItems, 0, 9);
-                @endphp
-                <div class="carousel">
-                    <div class="carousel-track-container">
-                        <ul class="carousel-track">
-                            <!-- Individual Slides -->
-                            @foreach ($headerMenuItems as $header)
-                                <li class="carousel-slide">
-                                    <div class="item">
-                                        <img src="assets/imgs/remit-continental.png" alt="Poultry" loading="lazy">
-                                        <p>{{ $header['name'] }}</p>
-                                    </div>
-                                </li>
-                            @endforeach 
-                        </ul>
+                @if(!empty($header_menu_items))
+                    <div class="carousel">
+                        <div class="carousel-track-container">
+                            <ul class="carousel-track">
+                                <!-- Individual Slides -->
+                                @foreach ($header_menu_items as $header)
+                                    <li class="carousel-slide">
+                                        <div class="item">
+                                            <a href="{{ route('categories.show', Crypt::encrypt($header['slug'])) }}">
+                                            <img src="assets/imgs/remit-continental.png" alt="Poultry" loading="lazy">
+                                            <p>{{ $header['name'] }}</p>
+                                            </a>
+                                        </div>
+                                    </li>
+                                @endforeach 
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                @endempty
+
             </div>
         </section>
-    <!-- End 3d sec -->
+    <!-- End 3rd sec -->
 
     <!-- product -->
         <section class="service-area">
@@ -109,222 +111,80 @@
                 <div class="content-headern">
                     <h2 style="font-size: 35px;">Our best <span style="font-size: 35px; font-family: 'Brush Script MT', cursive; color: #ffd700; ">sellers</span></h2>
                 </div>
-                <div class="row g-4">
-                            <!-- Product Card -->
+                @if(!empty($products[0]))
+                    <div class="row g-4">
+                        <!-- Product Card -->
+                        @foreach ($products[0] as $product)
                             <div class="col-md-4">
                                 <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="assets/imgs/p17-300x300.jpg" alt="Aged Whole" class="product-image">
-                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                    <div class="post-img  div-cusor" wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])">
+                                        <img src="assets/imgs/p17-300x300.jpg" alt="Aged Whole" class="product-image">
+                                        <a  class="over-layer"><i class="fa fa-link">Add To Cart</i></a>
+                                    </div>
+                                    <div class="post-content div-cusor">
+                                        <p class="product-title">{{ $product->name }} | Approx. 
+                                            @if(!empty($product->variants[0]))
+                                                {{  $product->variants[0]->variant_value }}
+                                                {{  $product->variants[0]->variant_name }}
+                                            -  
+                                                @if($product->variants[0]->variant_value != $product->latestVariant->variant_value)
+                                                    {{  $product->latestVariant->variant_value }}{{  $product->latestVariant->variant_name }}
+                                                @endif
+                                            @endif
+                                            |...
+                                        </p>
+                                        <div class="row" >
+                                            <div class="col-md-6"><p class="product-price">${{ number_format($product->price, 2)  }}</p></div>
+                                            <div class="col-md-6"><div class="stars">★★★★★</div></div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="post-content">
-                                    <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                                    <div class="row">
-                                        <div class="col-md-6"><p class="product-price">$120.00</p></div>
+                            </div>
+                        @endforeach
+                        <!-- Add more cards as needed -->
+                    </div>
+                @endif
+                @if(!empty($products[1]))
+                    <div class="row g-4">
+                        <!-- Product Card -->
+                        @foreach ($products[0] as $product)
+                        <div class="col-md-4">
+                            <div class="post-slide">
+                                <div class="post-img  div-cusor" wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])">
+                                    <img src="assets/imgs/p17-300x300.jpg" alt="Aged Whole" class="product-image">
+                                    <a  class="over-layer"><i class="fa fa-link">Add To Cart</i></a>
+                                </div>
+                                <div class="post-content div-cusor">
+                                    <p class="product-title">{{ $product->name }} | Approx. 
+                                        @if(!empty($product->variants[0]))
+                                            {{  $product->variants[0]->variant_value }}
+                                            {{  $product->variants[0]->variant_name }}
+                                        -  
+                                            @if($product->variants[0]->variant_value != $product->latestVariant->variant_value)
+                                                {{  $product->latestVariant->variant_value }}{{  $product->latestVariant->variant_name }}
+                                            @endif
+                                        @endif
+                                        |...
+                                    </p>
+                                    <div class="row" >
+                                        <div class="col-md-6"><p class="product-price">${{ number_format($product->price, 2)  }}</p></div>
                                         <div class="col-md-6"><div class="stars">★★★★★</div></div>
                                     </div>
                                 </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="assets/imgs/p17-300x300.jpg" alt="Aged Whole" class="product-image">
-                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="post-content">
-                                    <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                                    <div class="row">
-                                        <div class="col-md-6"><p class="product-price">$120.00</p></div>
-                                        <div class="col-md-6"><div class="stars">★★★★★</div></div>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="assets/imgs/p17-300x300.jpg" alt="Aged Whole" class="product-image">
-                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="post-content">
-                                    <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                                    <div class="row">
-                                        <div class="col-md-6"><p class="product-price">$120.00</p></div>
-                                        <div class="col-md-6"><div class="stars">★★★★★</div></div>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            <!-- Add more cards as needed -->
-                        </div>
-                        <div class="row g-4">
-                            <!-- Product Card -->
-                            <div class="col-md-4">
-                                <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="assets/imgs/p17-300x300.jpg" alt="Aged Whole" class="product-image">
-                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="post-content">
-                                    <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                                    <div class="row">
-                                        <div class="col-md-6"><p class="product-price">$120.00</p></div>
-                                        <div class="col-md-6"><div class="stars">★★★★★</div></div>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="assets/imgs/p17-300x300.jpg" alt="Aged Whole" class="product-image">
-                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="post-content">
-                                    <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                                    <div class="row">
-                                        <div class="col-md-6"><p class="product-price">$120.00</p></div>
-                                        <div class="col-md-6"><div class="stars">★★★★★</div></div>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="assets/imgs/p17-300x300.jpg" alt="Aged Whole" class="product-image">
-                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="post-content">
-                                    <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                                    <div class="row">
-                                        <div class="col-md-6"><p class="product-price">$120.00</p></div>
-                                        <div class="col-md-6"><div class="stars">★★★★★</div></div>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            <!-- Add more cards as needed -->
-                        </div>
-                <!-- <div class="row mt-5">
-                    <div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
-                        <div class="product-card">
-                            <div class="image-container">
-                                <img src="assets/imgs/p17-300x300.jpg" alt="Aged Whole" class="product-image">
-                                <div class="overlay">
-                                <input type="text" class="search-bar hidden" placeholder="Search products...">
-                                <button class="search-button">
-                                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                                </button>
-                            </div>
-                            </div>
-                            <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                            <div class="row">
-                                <div class="col-md-6"><p class="product-price">$120.00</p></div>
-                                <div class="col-md-6"><div class="stars">★★★★★</div></div>
                             </div>
                         </div>
+                    @endforeach
+                        <!-- Add more cards as needed -->
                     </div>
-                    <div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
-                        <div class="product-card">
-                            <div class="image-container">
-                                <img src="assets/imgs/img-1.png" alt="Aged Whole" class="product-image">
-                                <div class="overlay">
-                                <input type="text" class="search-bar hidden" placeholder="Search products...">
-                                <button class="search-button">
-                                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                                </button>
-                            </div>
-                            </div>
-                            <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                            <div class="row">
-                                <div class="col-md-6"><p class="product-price">$120.00</p></div>
-                                <div class="col-md-6"><div class="stars">★★★★★</div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
-                        <div class="product-card">
-                            <div class="image-container">
-                                <img src="assets/imgs/img-2.png" alt="Aged Whole" class="product-image">
-                                <div class="overlay">
-                                <input type="text" class="search-bar hidden" placeholder="Search products...">
-                                <button class="search-button">
-                                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                                </button>
-                            </div>
-                            </div>
-                            <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                            <div class="row">
-                                <div class="col-md-6"><p class="product-price">$120.00</p></div>
-                                <div class="col-md-6"><div class="stars">★★★★★</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
-                        <div class="product-card">
-                            <div class="image-container">
-                                <img src="assets/imgs/img-3.png" alt="Aged Whole" class="product-image">
-                                <div class="overlay">
-                                <input type="text" class="search-bar hidden" placeholder="Search products...">
-                                <button class="search-button">
-                                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                                </button>
-                            </div>
-                            </div>
-                            <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                            <div class="row">
-                                <div class="col-md-6"><p class="product-price">$120.00</p></div>
-                                <div class="col-md-6"><div class="stars">★★★★★</div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
-                        <div class="product-card">
-                            <div class="image-container">
-                                <img src="assets/imgs/p26-300x300.jpg" alt="Aged Whole" class="product-image">
-                                <div class="overlay">
-                                <input type="text" class="search-bar hidden" placeholder="Search products...">
-                                <button class="search-button">
-                                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                                </button>
-                            </div>
-                            </div>
-                            <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                            <div class="row">
-                                <div class="col-md-6"><p class="product-price">$120.00</p></div>
-                                <div class="col-md-6"><div class="stars">★★★★★</div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-4 col-xl-4 col-sm-12">
-                        <div class="product-card">
-                            <div class="image-container">
-                            <img src="assets/imgs/p3-300x300.jpg" alt="Raw chicken" class="product-image">
-                            <div class="overlay">
-                                <input type="text" class="search-bar hidden" placeholder="Search products...">
-                                <button class="search-button">
-                                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                                </button>
-                            </div>
-                        </div>
-                            <p class="product-title">Amish Whole Chicken | Approx. 2lb-3lb Chicken |...</p>
-                            <div class="row">
-                                <div class="col-md-6"><p class="product-price">$120.00</p></div>
-                                <div class="col-md-6"><div class="stars">★★★★★</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+                @endif
                 <div class="col-md-12 mt-5 text-center">
                     <button class="btn viw-btn">View More</button>
                 </div>
 
             </div>
         </section>
+        <livewire:add-to-cart-modal-component />
+
     <!-- How We Do -->
         <section class="how-it-works py-5 bg-light">
             <div class="container">

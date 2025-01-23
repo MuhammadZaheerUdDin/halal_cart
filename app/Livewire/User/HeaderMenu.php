@@ -13,7 +13,7 @@ class HeaderMenu extends Component
 
     public function mount()
     {
-        Cache::forget('header_menu_items');
+        // Cache::forget('header_menu_items');
         // Retrieve menu items from cache or database
         $this->header_menu_items = Cache::remember('header_menu_items', 60 * 60, function () {
             // Replace with your query to fetch dynamic menu items
