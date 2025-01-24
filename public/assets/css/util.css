@@ -2985,6 +2985,10 @@
 .wid-img {
     width: 27%;
 }
+.text-sm { font-size: 0.875rem; /* 14px */ line-height: 1.25rem; /* 20px */ }
+.text-red-600 {
+    color: #dc2626; /* Equivalent to Tailwind's red-600 */
+}
 
 
 

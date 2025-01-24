@@ -22,11 +22,28 @@
                     <div class="nav-icons">
                         <i class="fas fa-user dropdown-toggle" id="userIcon" role="button"></i>
                         <ul class="dropdown-menu" id="dropdownMenu">
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="{{ url('orders') }}">Orders</a></li>
-                            <li><a href="login.html">Login</a></li>
+                            @if(!empty(Auth::user()->id))
+                                <x-responsive-nav-link href="{{ route('orders') }}">
+                                    {{ __('Orders') }}
+                                </x-responsive-nav-link>
+                                <x-responsive-nav-link href="{{ route('profile') }}">
+                                    {{ __('Profile') }}
+                                </x-responsive-nav-link>
+                                <form method="POST" action="{{ route('logout') }}" x-data>
+                                    @csrf
+                
+                                    <x-responsive-nav-link href="{{ route('logout') }}"
+                                                   @click.prevent="$root.submit();">
+                                        {{ __('Log Out') }}
+                                    </x-responsive-nav-link>
+                                </form>
+                                @else
+                                <x-responsive-nav-link href="{{ route('login') }}">
+                                    {{ __('Login') }}
+                                </x-responsive-nav-link>    
+                            @endif
                         </ul>
-                        <a href="#" id="openMenuBtn"><i class="fas fa-shopping-cart"></i></a>
+                        <a href="{{ route('cart') }}" id="openMenuBtn"><i class="fas fa-shopping-cart"></i></a>
                     </div>
                 </div>
             </div>

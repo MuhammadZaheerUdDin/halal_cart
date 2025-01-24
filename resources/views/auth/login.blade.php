@@ -57,12 +57,12 @@
                         <img src="assets/imgs/meet-logo.png" class="wid-img">
                     </span>
                     
-                    <a href="#" class="btn-face m-b-20" style="height:50px">
+                    <a href="#" class="btn-face m-b-20" style="height:45px">
                         <i class="fa fa-facebook-official"></i>
                         Facebook
                     </a>
 
-                    <a href="#" class="btn-google m-b-20" style="height:50px">
+                    <a href="#" class="btn-google m-b-20" style="height:45px">
                         <img src="assets/imgs/icons/icon-google.png" alt="GOOGLE">
                         Google
                     </a>
@@ -80,7 +80,9 @@
                         </span>
                     </div>
                     <div class="wrap-input100 validate-input" data-validate = "Username is required">
-                        <input class="input100" type="text" name="username" style="height: 40px">
+                        {{-- <input class="input100" type="text" name="username" style="height: 40px"> --}}
+                        <x-input class="block mt-1 w-full input100" id="email" type="email" name="email" :value="old('email')"
+                         required autofocus autocomplete="username" />
                         <span class="focus-input100"></span>
                     </div>
                     
@@ -91,7 +93,10 @@
 
                     </div>
                     <div class="wrap-input100 validate-input" data-validate = "Password is required">
-                        <input class="input100" type="password" name="pass"  style="height: 40px">
+                        {{-- <input class="input100" type="password" name="pass"  style="height: 40px"> --}}
+                        <x-input id="password" class="block mt-1 w-full input100" type="password" name="password"
+                         required autocomplete="current-password" />
+
                         <span class="focus-input100"></span>
                     </div>
     
@@ -112,7 +117,7 @@
                             Not a member?
                         </span>
 
-                        <a href="sign_up.html" class="txt2 bo1">
+                        <a href="{{ url('register') }}" class="txt2 bo1">
                             Sign up now
                         </a>
                     </div>

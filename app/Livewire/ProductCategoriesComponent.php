@@ -39,7 +39,7 @@ class ProductCategoriesComponent extends Component
      */
     public function render() //: View|Closure|string
     {
-        $products = $this->productRepository->getAll(['sub_category_id'=>$this->sub_category->id]); // Fetch all products
+        $products = $this->productRepository->getAll(['subcategory_id'=>$this->sub_category->id]); // Fetch all products
         return view('livewire.user.product-categories-component',compact('products'))->layout('layouts.app');
     }
     

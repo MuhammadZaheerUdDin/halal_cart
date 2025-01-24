@@ -15,6 +15,7 @@ use App\Livewire\User\CheckoutComponent;
 use App\Livewire\ProductDetailComponent;
 use App\Livewire\User\HomeComponent;
 use App\Livewire\User\OrderComponent;
+use App\Livewire\User\ProfileComponent;
 use App\Models\Category;
 
 // use App\Livewire\CartComponent;
@@ -24,18 +25,25 @@ use Illuminate\Support\Facades\Storage;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+// Route::group(['middleware' => 'guest'], function () {
+//     Route::get('/register', [AuthController::class, 'register'])->name('register');
+//     Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
+//     Route::get('/login', [AuthController::class, 'login'])->name('login');
+//     Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
+// });
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::get('/home', [HomeController::class, 'index']);
+//     Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
+// });
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
+Route::get('dashboard', HomeComponent::class)->name('dashboard');
+
+
 Route::get('/', HomeComponent::class)->name('home');
 
-    // Route::group(['middleware' => 'guest'], function () {
-    //     Route::get('/register', [AuthController::class, 'register'])->name('register');
-    //     Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
-    //     Route::get('/login', [AuthController::class, 'login'])->name('login');
-    //     Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
-    // });
-    // Route::group(['middleware' => 'auth'], function () {
-    //     Route::get('/home', [HomeController::class, 'index']);
-    //     Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
-    // });
 
 // Admin Routes
 Route::prefix('admin')->group(function () {
@@ -67,11 +75,9 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
     Route::get('/products',ProductComponent::class);
+    Route::get('/profile',ProfileComponent::class)->name('profile');
+    ;
     Route::get('/cart', CartComponent::class)->name('cart');
     Route::get('/checkout', CheckoutComponent::class)->name('checkout');
     Route::post('checkout/payment', [CheckoutComponent::class,'checkout'])->name('checkout.payment');
@@ -79,13 +85,3 @@ Route::middleware([
     Route::get('/orders', OrderComponent::class)->name('orders');
 
 });
-
-// Route::get('/product-images/{filename}', function ($filename) {
-//     $path = 'product_images/' . $filename;
-
-//     if (!Storage::exists($path)) {
-//         abort(404);
-//     }
-
-//     return response()->file(storage_path('app/' . $path));
-// })->name('product.image');

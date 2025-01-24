@@ -70,10 +70,10 @@
                 <div class="row mt-4">
                     <div class="cart-header">
                         <div class="col-md-4 col-lg-4 col-xl-4 col-sm-6 col-xs-6">
-                            <span>2 Product</span>
+                            <span class="product-price"> @if(!empty(Illuminate\Support\Facades\Auth::user()->id)) {{  $cart->sum('total') }} @endif Product</span>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-4 col-sm-6 col-xs-6" align="right">
-                            <span>$26.00</span>
+                            <span class="product-price">$@if(!empty($cart) && !empty(Illuminate\Support\Facades\Auth::user()->id)) {{ $cart->sum('quantity') }} @else 0 @endif</span>
                         </div>
                     </div>
                 </div>
