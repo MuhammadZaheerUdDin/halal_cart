@@ -54,7 +54,7 @@
                         @csrf
             
                     <span class="login100-form-title p-b-20">
-                        <img src="assets/imgs/meet-logo.png" class="wid-img">
+                        <img src="{{ url('assets/imgs/meet-logo.png') }}" class="wid-img">
                     </span>
                     
                     <a href="#" class="btn-face m-b-20" style="height:45px">

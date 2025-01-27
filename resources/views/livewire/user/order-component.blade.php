@@ -1,83 +1,21 @@
 <div>
 
+    <!-- Hero Section -->
     <section class="hero-service-wrap hero-section-wrap hero-overview-wrap hero-how-we-do-wrap">
-        <div class="hero-section-content-wrap">
-            <div class="custom-container">
-                <div class="hero-section-content text-center">
-                    <h1 class="section-title fade-in fnt-cl">Top-Quality Zabiha Halal Meat Delivery Online</h1>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="hero-section-content-wrap">
+          <div class="custom-container">
+              <div class="hero-section-content text-center">
+                  <h1 class="section-title fade-in fnt-cl">Orders</h1>
+              </div>
+          </div>
+      </div>
+  </section>
 
         <!-- 3d sec -->
-        <section class="service-area">
-            <div class="container py-5">
-                <div class="row">
-                    <!-- Filter Sidebar -->
-                    <div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 col-xs-12">
-                        <div class="filter-section">
-                            <button class="filter-button" >
-                                <span>Filter</span>
-                                <span class="filter-icon">
-                                  <!-- Icon as SVG -->
-                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M10 18h4v-2h-4v2zm-7-5h18v-2H3v2zm3-7v2h12V6H6z"/>
-                                  </svg>
-                                </span>
-                              </button>
-    
-                            <hr>
-                            <div class="rating-section">
-                              <h3>Rating</h3>
-                              <div class="rating-option">
-                                <input type="checkbox" id="rating-5" />
-                                <label for="rating-5">
-                                  <span class="stars">★★★★★ <span style="color: black;">5.0</span></span>
-                                </label>
-                              </div>
-                              <div class="rating-option">
-                                <input type="checkbox" id="rating-4" checked />
-                                <label for="rating-4">
-                                  <span class="stars">★★★★☆ <span style="color: black;">4.0 & up</span></span>
-                                </label>
-                              </div>
-                              <div class="rating-option">
-                                <input type="checkbox" id="rating-3" />
-                                <label for="rating-3">
-                                  <span class="stars">★★★☆☆ <span style="color: black;">3.0 & up</span></span>
-                                </label>
-                              </div>
-                              <div class="rating-option">
-                                <input type="checkbox" id="rating-2" />
-                                <label for="rating-2">
-                                  <span class="stars">★★☆☆☆ <span style="color: black;">2.0 & up</span></span>
-                                </label>
-                              </div>
-                              <div class="rating-option">
-                                <input type="checkbox" id="rating-1" />
-                                <label for="rating-1">
-                                  <span class="stars">★☆☆☆☆ <span style="color: black;">1.0 & up</span></span>
-                                </label>
-                              </div>
-                            </div>
-    
-                        </div>
-                    </div>
-    
-                    <!-- Product Grid -->
-                    <div class="col-md-9 col-lg-9 col-xl-9 col-sm-12 col-xs-12">
-                        <div class="d-flex justify-content-between mb-4">
-                            <div>
-                                <label for="sort" class="form-label">Sort by:</label>
-                                <select id="sort" class="form-select d-inline w-auto">
-                                    <option value="latest">Latest</option>
-                                    <option value="price-low">Price: Low to High</option>
-                                    <option value="price-high">Price: High to Low</option>
-                                </select>
-                            </div>
-                            <div>52 Results Found</div>
-                        </div>
+
+
+                  <!-- Product Grid -->
+                    {{-- <div class="col-md-9 col-lg-9 col-xl-9 col-sm-12 col-xs-12">
                         @foreach ($product_orders as $order)
                             <div class="row g-4">
                                 <!-- Product Card -->
@@ -99,10 +37,64 @@
                                 <!-- Add more cards as needed -->
                             </div>
                         @endforeach
-                    </div>
+                    </div> --}}
+    <!-- 3d sec -->
+    <section class="how-it-works py-5 bg-light">
+      <div class="container">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center text-lg-start">
+          <h2 class="text-uppercase text-dark text-center">Orders</h2>
+          <div class="orders-container">
+              <div class="tabs">
+                <button class="tab-button @if($status=='all') active @endif" wire:click="showTab('all')">All</button>
+                <button class="tab-button @if($status=='paid') active @endif" wire:click="showTab('paid')">Pending</button>
+                <button class="tab-button @if($status=='processing') active @endif" wire:click="showTab('processing')">Processing</button>
+                <button class="tab-button @if($status=='shipped') active @endif" wire:click="showTab('shipped')">Shipped</button>
+                {{-- <button class="tab-button @if($status=='review') active @endif" wire:click="showTab('review')">To Review</button> --}}
+                <button class="tab-button @if($status=='completed') active @endif" wire:click="showTab('completed')">Completed</button>
+              </div>
+              @if(!empty($product_orders[0]))
+                  
+                <!-- All Orders Tab -->
+                <div class="order-list" id="all">
+                  @foreach ($product_orders as $product_order)
+                    @foreach ($product_order->orderProducts as $order)
+                      <a class="order-item">
+                        {{-- <a class="order-item" href="cancelation.html"> --}}
+                          <div class="order-details">
+                          <img src="{{ asset('storage/'.$order->product->image) }}">
+                          <div class="details">
+                            <p><strong>Fresh Boneless Meat</strong></p>
+                            <p>Rs. {{ $order->price }}</p>
+                            <p>Qty: {{ $order->quantity }}</p>
+                          </div>
+                        </div>
+                        <div class="status completed">@if(!empty($product_order->status)) {{ $order->status }} @endif</div>
+                      </a>
+                    @endforeach
+                  @endforeach
                 </div>
+                  <!-- To Pay Tab -->
+                  {{-- <div class="order-list" id="to-pay" style="display: none;">
+                    <p>No orders to pay.</p>
+                  </div>
+                  <!-- To Ship Tab -->
+                  <div class="order-list" id="to-ship" style="display: none;">
+                    <p>No orders to ship.</p>
+                  </div>
+                  <!-- To Receive Tab -->
+                  <div class="order-list" id="to-receive" style="display: none;">
+                    <p>No orders to receive.</p>
+                  </div> --}}
+                @else
+                  <!-- To Review Tab -->
+                  <div class="order-list"  style="">
+                    <p>No orders to review.</p>
+                  </div>
+                @endempty                
             </div>
-        </section>
-    
+        </div>
+      </div>
+  </section>
+  
 
 </div>

@@ -39,7 +39,7 @@
         <script src="{{ asset('js/custom.js') }}" defer></script>
         <script src="https://js.stripe.com/v3/"></script>
         <script type="text/javascript"></script>
-        <script src="{{ asset('js/custom_user.js') }}" ></script>
+        {{-- <script src="{{ asset('js/custom_user.js') }}" ></script> --}}
         <!-- Styles -->
         @livewireStyles
     </head>

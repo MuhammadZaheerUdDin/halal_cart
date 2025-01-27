@@ -11,6 +11,23 @@ class Order extends Model
     use HasFactory;
     protected $fillable = ['user_id', 'total', 'status', 'first_name' , 'last_name' ,'email' ,'phone_number' ,'address1', 'address2','country', 'city', 'state', 'postal_code', 'country','is_paid'];
 
+    public static $statusFlow = [
+        'paid' => 'processing',
+        'processing' => 'shipped',
+        'shipped' => 'completed',
+    ];
+    
+    public static $cancelableStatuses = ['paid', 'processing'];
+
+    public static $failedStatusFlow = [
+        'shipped' => 'failed_delivery',
+    ];
+
+    public function getNextStatusAttribute()
+    {
+        return self::$statusFlow[$this->status] ?? null;
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);

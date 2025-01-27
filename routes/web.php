@@ -15,6 +15,7 @@ use App\Livewire\User\CheckoutComponent;
 use App\Livewire\ProductDetailComponent;
 use App\Livewire\User\HomeComponent;
 use App\Livewire\User\OrderComponent;
+use App\Livewire\Admin\Order\OrderComponent as AdminOrderComponent;
 use App\Livewire\User\ProfileComponent;
 use App\Models\Category;
 
@@ -63,6 +64,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/product/edit/{id}', AdminProductCreateCompoment::class)->name('admin.product.edit');
         Route::get('/categories',AdminCategoryComponent::class)->name('admin.categories');
         Route::get('/subcategories',AdminSubCategoryComponent::class)->name('admin.subcategories');
+        Route::get('/orders',AdminOrderComponent::class)->name('admin.orders');
     });
 });
 
@@ -75,7 +77,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
-    Route::get('/products',ProductComponent::class);
+    Route::get('/products',ProductComponent::class)->name('products');
     Route::get('/profile',ProfileComponent::class)->name('profile');
     ;
     Route::get('/cart', CartComponent::class)->name('cart');

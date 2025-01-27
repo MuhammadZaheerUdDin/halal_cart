@@ -1,3 +1,4 @@
+
 let list = document.querySelector('.slider .list');
 let items = document.querySelectorAll('.slider .list .item');
 let dots = document.querySelectorAll('.slider .dots li');
@@ -45,8 +46,48 @@ if (dots) {
       })
   })
 }
-    // <!-- news-slider -->
-    $(document).ready(function () {
+
+
+
+// <!-- news-slider -->
+    $(document).ready(function () {      
+      // alert('za');
+      $(".product-hide").show();
+      $(".product-card_new").hide();
+      $("nav ul li").click(function() {
+        var target = $(this).data("target");
+        if (target) {
+          if ($(this).hasClass("back-btn")) {
+            // Logic for the back button
+            $(".product-hide").show(); // Hide all other sections
+            $(".product-card_new").hide(); // Show the main "services" section
+          }else{
+            $(".product-hide").hide(); // Hide all sections        
+            $(".product-card_new").show();
+          }
+                    // var target = $(this).attr("data-target"); // Get the target class
+          // $(target).show(); // Show the targeted section
+        }
+      });
+    //   $(".s-h").removeClass("active"); // Hide all sections
+    //   $(".services").addClass("active"); // Show the default section
+    //   $("nav ul li").click(function () {
+    //     var target = $(this).data("target");
+    //     if (target) {
+    //         $(".s-h").removeClass("active"); // Hide all sections
+    //         $(target).addClass("active"); // Show the targeted section
+    //     }
+    // });
+      
+      // Run your JavaScript after Livewire updates the DOM
+      const halalBox = document.querySelectorAll('.services');
+      if (halalBox.length > 0) {
+          halalBox.forEach(box => {
+              box.style.display = 'block'; // Show the element
+              //alert('Zaheer'); // Example alert
+          });
+      }
+        
       $("#news-slider").owlCarousel({
         items: 3,
         margin: 0,
@@ -211,16 +252,17 @@ if (dots) {
 
     const userIcon = document.getElementById("userIcon");
     const dropdownMenu = document.getElementById("dropdownMenu");
-
-    userIcon.addEventListener("click", function (e) {
-        e.stopPropagation(); // Prevent click from propagating to document
-        dropdownMenu.classList.toggle("show");
-    });
-
-    // Close the dropdown when clicking outside
-    document.addEventListener("click", function () {
-        dropdownMenu.classList.remove("show");
-    });
-        
+    if(userIcon){
+      userIcon.addEventListener("click", function (e) {
+          e.stopPropagation(); // Prevent click from propagating to document
+          dropdownMenu.classList.toggle("show");
+      });
+    }
+    if(dropdownMenu){
+      // Close the dropdown when clicking outside
+      document.addEventListener("click", function () {
+          dropdownMenu.classList.remove("show");
+      });
+    }
   });
 

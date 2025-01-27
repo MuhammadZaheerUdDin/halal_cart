@@ -18,7 +18,7 @@ class ProductCategoriesComponent extends Component
     protected $productRepository;
     protected $cartRepository;
     public $sub_category;
-
+    private $page = null;
     /**
      * Create a new component instance.
      */
@@ -31,7 +31,11 @@ class ProductCategoriesComponent extends Component
     public function mount($encrypted)
     {
         $category = Crypt::decrypt($encrypted);
-
+        if ($category && str_contains(strtolower($category), 'boxed')) {
+            $this->page = 'boxed';
+        }else{
+            $this->page = null;
+        }
         $this->sub_category = SubCategory::where('slug',$category)->first();
     }
     /**
@@ -40,7 +44,11 @@ class ProductCategoriesComponent extends Component
     public function render() //: View|Closure|string
     {
         $products = $this->productRepository->getAll(['subcategory_id'=>$this->sub_category->id]); // Fetch all products
-        return view('livewire.user.product-categories-component',compact('products'))->layout('layouts.app');
+        if(empty($this->page)){
+            return view('livewire.user.product-categories-component',compact('products'))->layout('layouts.app');
+        }else{
+            return view('livewire.user.product-box-categories-component',compact('products'))->layout('layouts.app');
+        }
     }
     
 

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateAdminRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 
 class AdminAuthController extends Controller
@@ -22,6 +23,14 @@ class AdminAuthController extends Controller
 
     public function showLoginForm()
     {
+        if(empty(Auth::user())){
+            if(!empty(Auth::user()->id) && empty(Auth::user()->user_roles)){
+                Auth::logout(); // Log the user out
+                Session::flush(); // Clear the session data
+                return redirect('/login')->with('message', 'You have been logged out due to missing user roles.');            
+            }
+            return redirect('admin/dashboard');
+        }
         return view('admin.admin_login')->layout('layouts.app'); 
     }
 

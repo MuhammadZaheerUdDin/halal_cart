@@ -159,8 +159,8 @@
                             Not a member?
                         </span>
 
-                        <a href="sign_up.html" class="txt2 bo1">
-                            Sign up now
+                        <a href="{{ url('login') }}" class="txt2 bo1">
+                            Sign in
                         </a>
                     </div>
                 </form>

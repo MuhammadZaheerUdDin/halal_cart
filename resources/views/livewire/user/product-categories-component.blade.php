@@ -153,7 +153,8 @@
                         @foreach($products as $product)
                         <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
                           <div class="post-slide">
-                            <div class="post-img  div-cusor" wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])">                                    <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}" class="product-image">
+                            <div class="post-img  div-cusor" wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])">
+                                <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}" class="product-image">
                                   {{-- <a href="{{ route('products.show', $product->id) }}" class="over-layer"><i class="fa"></i></a> --}}
                                   <a  class="over-layer"><i class="fa fa-link">Add To Cart</i></a>
                             </div>

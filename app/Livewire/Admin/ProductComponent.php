@@ -108,7 +108,7 @@ class ProductComponent extends Component
 
         // Save Images
         foreach ($this->images as $image) {
-            $path = $image->store('product_images');
+            $path = $image->store('product_images', 'public');
             ProductImage::create([
                 'product_id' => $product->id,
                 'image_path' => $path,

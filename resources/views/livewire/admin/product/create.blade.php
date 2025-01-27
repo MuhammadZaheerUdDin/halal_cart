@@ -5,17 +5,15 @@
         <x-breadcrumb />
     </div>
 
-
-    @if (session()->has('message'))
-        <div class="bg-green-500 text-white p-2 mb-4">
-            {{ session('message') }}
-        </div>
-    @endif
-
     <!-- Form -->
     <div class="border-div">
         <h5 class="text-2xl font-bold">  {{ $isEditing ? 'Update Product' : 'Create Product' }}</h1>
-            
+        @if (session()->has('message'))
+            <div class="bg-green-500 text-white p-2 mb-4" style="border-radius:10px;">
+                {{ session('message') }}
+            </div>
+        @endif
+                
         <form wire:submit.prevent="{{ $isEditing ? 'updateProduct' : 'createProduct' }}" class="grid grid-cols-2 gap-6 mb-6  border-div border-div-inner">
             <!-- Product Info-->
             <!-- <div class="col-span-2">
@@ -34,7 +32,11 @@
                     <select wire:model="subcategory_id" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                         <option value="">Select Sub-Category</option>
                         @foreach($subcategories as $sub)
-                            <option value="{{ $sub->id }}">{{ $sub->name }}</option>
+                            @if($category_id==$sub->id)
+                                <option value="{{ $sub->id }}" selected>{{ $sub->name }}</option>
+                            @else
+                                <option value="{{ $sub->id }}">{{ $sub->name }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>        
@@ -76,9 +78,9 @@
                 @enderror
             </div>        
             <!-- Image -->
-            <div class="col-span-2 md:col-span-1">
+            <div class="col-span-2 md:col-span-2">
                 <label class="block">
-                    <span class="sr-only">Choose Product Image</span>
+                    <span class="text-sm text-slate-500">Choose Product Profile Image</span>
                     <input type="file" id="" wire:model="image"  class="block w-full text-sm text-slate-500
                         file:mr-4 file:py-2 file:px-4
                         file:rounded-full file:border-0
@@ -125,9 +127,9 @@
                 </div>    
             </div>    
             <!-- Images -->
-            <div class="col-span-2 md:col-span-1">
+            <div class="col-span-2 md:col-span-2">
                 <label class="block">
-                    <span class="sr-only">Upload Product Image's (*)</span>
+                    <span class="text-sm text-slate-500">Upload Product Image's (*)</span>
                     <input type="file" id="images" wire:model="images"  class="block w-full text-sm text-slate-500
                         file:mr-4 file:py-2 file:px-4
                         file:rounded-full file:border-0
@@ -162,19 +164,22 @@
         </form>
 
         @if($isEditing && !empty($variants))
+            <h5 class="text-2xl font-bold">  {{  'Update Variants' }}</h1>
+                    {{-- <div class="grid grid-cols-2 gap-6 mb-6 border-2 p-1  rounded-lg" style="border-color:rgb(121, 116, 116)"> --}}
             @if (session()->has('variant_success_message'))
-                <div class="bg-green-500 text-white mb-4">
+                <div class="bg-green-500 text-white mb-4"  style="border-radius:10px;">
                     <label>
                     {{ session('variant_success_message') }}
                     </label>
                 </div>
             @endif
-            <h5 class="text-2xl font-bold">  {{  'Update Variants' }}</h1>
-                    {{-- <div class="grid grid-cols-2 gap-6 mb-6 border-2 p-1  rounded-lg" style="border-color:rgb(121, 116, 116)"> --}}
+    
+    
             <div class="grid grid-cols-2 gap-6 mb-6 border-separate border-opacity-10 border-div border-div-inner">
                 @foreach($variants as $index => $variant)
-                    <div class="col-span-2  md:col-span-1 border-r-2 border-dashed border-r-emerald-50  border-div " >
+                    <div class="col-span-2  md:col-span-1 border-r-2 border-dashed border-r-emerald-50  border-div ">
                         <h6 class="text-2xl font-bold">Variant {{ $index + 1 }}</h6>
+    
                         <div class="col-span-2 md:col-span-1">
                             <label for="variant_name" class="block text-sm font-medium text-gray-700">Variant Name:</label>
                             <input type="text" wire:model="variants.{{ $index }}.variant_name" class="p-2 border rounded">

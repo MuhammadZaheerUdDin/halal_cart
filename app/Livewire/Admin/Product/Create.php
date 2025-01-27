@@ -16,7 +16,7 @@ class Create extends Component
     use WithFileUploads;
 
     public $products, $variants = [], $images = [], $previewImages = [];
-    public $name, $description, $price, $stock, $sku, $category_id, $subcategory_id, $is_disabled, $image, $productId, $categories, $subcategories;
+    public $name, $description, $price, $stock, $sku, $category_id, $subcategory_id, $is_disabled, $image, $productId, $categories, $subcategories, $product_images_old;
     
     public $variant_name
     ,$variant_value
@@ -46,7 +46,7 @@ class Create extends Component
             'sku' => 'required|string|max:100|unique:products,sku' . ($this->productId ? ",$this->productId" : ''),
             // 'category_id' => 'required|integer|exists:categories,id',
             'subcategory_id' => 'required|integer|exists:sub_categories,id',
-            'images.*' => 'image|max:2048', // Image validation
+            'images.*' => 'nullable|max:2048', // Image validation
             'image' => 'nullable|max:2048', // 2MB max
         ];
     }
@@ -159,12 +159,13 @@ class Create extends Component
         $this->sku = $product->sku;
         $this->category_id = $product->category_id;
         $this->variants = $product->variants; // Load product variants
-        $this->images = $product->images; // Load product images
+        $this->images = '';//$product->images; // Load product images
+        $this->product_images_old = $product->images->pluck('image_path')->toArray();;
         $this->is_disabled = $product->is_disabled; // Load product images
         // $this->isEditing = true; // Set editing mode to true
         // dd($product->variants->toArray());
         $this->variants = $product->variants->toArray(); // Load all variants
-        $this->images = $product->images->pluck('image_path')->toArray(); // Load image paths
+        // $this->images = $product->images->pluck('image_path')->toArray(); // Load image paths
     }
 
     public function updateProduct()
@@ -180,6 +181,7 @@ class Create extends Component
             $imagePath = $this->image->store('products', 'public');
             $product->image = $imagePath;
         }
+        $this->isEditing = true;
 
         $product->update([
             'name' => $this->name,
@@ -206,16 +208,19 @@ class Create extends Component
         // }        
 
         // Update images
-        foreach ($this->images as $image) {
-            $path = $image->store('product_images');
-            ProductImage::create([
-                'product_id' => $product->id,
-                'image_path' => $path,
-                'is_main' => false,
-            ]);
-        }        
+        if(!empty($this->images)){
+            dd($this->images);
+            foreach ($this->images as $image) {
+                $path = $image->store('product_images','public');
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_path' => $path,
+                    'is_main' => false,
+                ]);
+            }        
+        }
         session()->flash('message', 'Product updated successfully.');
-        $this->resetFields();
+        // $this->resetFields();
     }
     
     public function updateVariant($index){

@@ -118,7 +118,7 @@
                             <div class="col-md-4">
                                 <div class="post-slide">
                                     <div class="post-img  div-cusor" wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])">
-                                        <img src="assets/imgs/p17-300x300.jpg" alt="Aged Whole" class="product-image">
+                                        <img src="{{ asset('storage/' . $product->image) }}" alt="Aged Whole" class="product-image">
                                         <a  class="over-layer"><i class="fa fa-link">Add To Cart</i></a>
                                     </div>
                                     <div class="post-content div-cusor">
@@ -151,7 +151,7 @@
                         <div class="col-md-4">
                             <div class="post-slide">
                                 <div class="post-img  div-cusor" wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])">
-                                    <img src="assets/imgs/p17-300x300.jpg" alt="Aged Whole" class="product-image">
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="Aged Whole" class="product-image">
                                     <a  class="over-layer"><i class="fa fa-link">Add To Cart</i></a>
                                 </div>
                                 <div class="post-content div-cusor">

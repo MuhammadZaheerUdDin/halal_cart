@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class OrderRepository
 {
@@ -12,20 +13,29 @@ class OrderRepository
      */
     public function getAll($filters = [])
     {
+        // dd($filters['status']);
         $query = Order::query();
+        if(!empty(Auth::user()->id)){
+            if(!empty(Auth::user()->user_role) && (Auth::user()->user_role == "super_admin")){
 
+            }else{
+                $query->where('user_id', Auth::user()->id);
+            }
+        }
         if (!empty($filters['category_id'])) {
             $query->where('category_id', $filters['category_id']);
         }
         if (!empty($filters['subcategory_id'])) {
             $query->where('subcategory_id', $filters['subcategory_id']);
         }
-
-        if (!empty($filters['search'])) {
-            $query->where('name', 'like', '%' . $filters['search'] . '%');
+        if (!empty($filters['name'])) {
+            $query->where('name', 'like', '%' . $filters['name'] . '%');
+        }
+        if (!empty($filters['status'])) {
+            $query->where('status', 'like', '%' . $filters['status'] . '%');
         }
 
-        return $query->get();
+        return $query->with('orderProducts')->get();
     }
 
     /**

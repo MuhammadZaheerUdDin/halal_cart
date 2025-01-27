@@ -37,3 +37,4 @@ $('.contact-form').each(function () {
         });
     });
 });
+

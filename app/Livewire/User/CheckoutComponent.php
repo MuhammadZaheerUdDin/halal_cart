@@ -213,6 +213,7 @@ class CheckoutComponent extends Component
                 $address = $this->addressRepository->findById(Auth::user()->id);
                 $order_array = [
                     'user_id'=>Auth::user()->id
+                    // ,'order_number' => 'ORD-' . strtoupper(uniqid()) // Unique order number
                     ,'total'=>$t_price
                     ,'first_name'=> $address->first_name ?? null
                     ,'last_name'=> $address->last_name ?? null
