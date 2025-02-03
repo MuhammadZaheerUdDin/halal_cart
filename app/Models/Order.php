@@ -48,4 +48,9 @@ class Order extends Model
         return $this->hasMany(ProductVariant::class);
     }
 
+    public function shippingAddress()
+    {
+        return $this->hasOne(ShippingAddress::class);
+    }
+
 }

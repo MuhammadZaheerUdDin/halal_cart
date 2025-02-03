@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 
+use App\Mail\OrderConfirmationMail;
 use App\Models\Order;
 use App\Models\ShippingAddress;
 use App\Repositories\AddressRepository;
@@ -13,6 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Livewire\Component;
 use Stripe;
@@ -237,7 +239,8 @@ class CheckoutComponent extends Component
                 }
                 $cart = $this->cartRepository->getOrCreateCart(Auth::user()->id);
                 $this->cartRepository->clearCart($cart);
-    
+                Mail::to(Auth::user()->email)->send(new OrderConfirmationMail($order));
+                
                 DB::commit();
                 return redirect()->to('orders')->with(['success'=>'Payment did not complete successfully.']);
                 // session()->flash('message', 'Product added to cart successfully.');
@@ -249,7 +252,7 @@ class CheckoutComponent extends Component
         }catch(Exception $e){
             DB::rollBack();
             session()->flash('error', 'Payment failed.');
-            return redirect()->back()->with(['error'=>'Payment failure.']);
+            return redirect()->back()->with(['error'=>'Payment failure.'.$e]);
         }
     }
 

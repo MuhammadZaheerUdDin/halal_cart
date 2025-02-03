@@ -24,26 +24,29 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 // Route::get('/', function () {
-//     return view('welcome');
-// });
-// Route::group(['middleware' => 'guest'], function () {
-//     Route::get('/register', [AuthController::class, 'register'])->name('register');
-//     Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
-//     Route::get('/login', [AuthController::class, 'login'])->name('login');
-//     Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
-// });
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::get('/home', [HomeController::class, 'index']);
-//     Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
-// });
+    //     return view('welcome');
+    // });
+    // Route::group(['middleware' => 'guest'], function () {
+    //     Route::get('/register', [AuthController::class, 'register'])->name('register');
+    //     Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
+    //     Route::get('/login', [AuthController::class, 'login'])->name('login');
+    //     Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
+    // });
+    // Route::group(['middleware' => 'auth'], function () {
+    //     Route::get('/home', [HomeController::class, 'index']);
+    //     Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
+    // });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
 // })->name('dashboard');
-Route::get('dashboard', HomeComponent::class)->name('dashboard');
 
-
-Route::get('/', HomeComponent::class)->name('home');
+//Google
+// Route::get('/login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('login.google');
+// Route::get('/login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
+// //Facebook
+// Route::get('/login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+// Route::get('/login/facebook/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleFacebookCallback']);
 
 
 // Admin Routes
@@ -68,6 +71,9 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+
+Route::get('dashboard', HomeComponent::class)->name('dashboard');
+Route::get('/', HomeComponent::class)->name('home');
 Route::get('/categories/{encrypted}', ProductCategoriesComponent::class)->name('categories.show');
 Route::get('/products/{slug}', ProductDetailComponent::class)->name('products.show');
 

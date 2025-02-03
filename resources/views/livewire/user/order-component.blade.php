@@ -53,7 +53,6 @@
                 <button class="tab-button @if($status=='completed') active @endif" wire:click="showTab('completed')">Completed</button>
               </div>
               @if(!empty($product_orders[0]))
-                  
                 <!-- All Orders Tab -->
                 <div class="order-list" id="all">
                   @foreach ($product_orders as $product_order)
@@ -73,25 +72,13 @@
                     @endforeach
                   @endforeach
                 </div>
-                  <!-- To Pay Tab -->
-                  {{-- <div class="order-list" id="to-pay" style="display: none;">
-                    <p>No orders to pay.</p>
-                  </div>
-                  <!-- To Ship Tab -->
-                  <div class="order-list" id="to-ship" style="display: none;">
-                    <p>No orders to ship.</p>
-                  </div>
-                  <!-- To Receive Tab -->
-                  <div class="order-list" id="to-receive" style="display: none;">
-                    <p>No orders to receive.</p>
-                  </div> --}}
-                @else
-                  <!-- To Review Tab -->
-                  <div class="order-list"  style="">
-                    <p>No orders to review.</p>
-                  </div>
-                @endempty                
-            </div>
+              @else
+                <!-- To Review Tab -->
+                <div class="order-list"  style="">
+                  <p>No orders to review.</p>
+                </div>
+              @endempty
+          </div>
         </div>
       </div>
   </section>

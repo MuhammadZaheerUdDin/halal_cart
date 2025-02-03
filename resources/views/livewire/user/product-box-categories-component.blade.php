@@ -12,34 +12,6 @@
     </section>
 
       <!-- Product Card -->
-        {{-- @foreach($products as $product)
-        <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-          <div class="post-slide">
-            <div class="post-img  div-cusor" wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])">                                    <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}" class="product-image">
-                  <a  class="over-layer"><i class="fa fa-link">Add To Cart</i></a>
-            </div>
-            <div class="post-content div-cusor">
-                <p class="product-title">{{ $product->name }} | {{ $product->variants[0]->variant_value ?? '1lbs' }}</p>
-                <div class="row">
-                    <div class="col-md-6">
-                        <p class="product-price">${{ number_format($product->price, 2) }}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="stars">
-                            {{ str_repeat('★', $product->rating) }}
-                            {{ str_repeat('☆', 5 - $product->rating) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-        @if(($loop->iteration % 3) == 0)
-            <div class="w-100"></div>
-        @endif
-      @endforeach --}}
-                        
-      <!-- Product Grid -->
       <style type="text/css">
        
         .product-card {
@@ -179,9 +151,9 @@
                             class="product-card__image product-card__image--secondary">
                       </div>
                       <div class="product-card__info">
-                        <div class="stars1">★★★★ <span style="font-size: 12px; color: black;"> (4.5)</span></div>
-                        <a href="/products/best-of-boxed-halal" class="product-title">Halal Box - Best of Boxed Halal</a>
-                        <p class="custom-description">The Best of Boxed Halal - Family Halal Box is just that: the best of the best. Contains our top-selling halal meats for you and your family.</p>
+                        {{-- <div class="stars1">★★★★ <span style="font-size: 12px; color: black;"> (4.5)</span></div> --}}
+                        <a href="/products/best-of-boxed-halal" class="product-title">{{ $products[0]->name }}</a>
+                        <p class="custom-description">{{ $products[0]->description }}</p>
                         <div class="row">
                           <nav>
                             <ul>
@@ -213,7 +185,7 @@
                     <div class="row mt-5">
                       <nav>
                           <ul>
-                              <li class="lok-insd mb-2"><a href="" class="fnt-clr">ADD TO CART <span>- $149.99</span></a></li>
+                              {{-- <li class="lok-insd mb-2"><a wire:click="$dispatch('openAddToCartModal', [63])" class="fnt-clr">ADD TO CART <span>- $149.99</span></a></li> --}}
                               <li class="navContact lok-insd-new back-btn" data-target=".services">BACK</li>
                           </ul>
                       </nav>
@@ -221,37 +193,6 @@
                     </div>
                   </div>
                 </div>
-              {{-- <div class="col-md-4 col-lg-4 col-xl-4 col-sm-12 col-xs-12 contact s-h">
-                  <div class="product-card">
-                      <div class="product-card__new">
-                          <a href="/products/boxed-halal-wagyu-box" class="product-title h6 " data-instant=""><span>Boxed Halal - Wagyu Box</span></a>
-                          <p class="text-lft">Includes:</p>
-                          <div class="ro-stl">
-                              <ul>
-                                  <li>10 oz Wagyu New York Strips (1x)</li>
-                                  <li>10 oz Wagyu Ribeye Steaks (2x)</li>
-                                  <li>1 lb Wagyu Burger (2x)</li>
-                              </ul>
-                          </div>
-                          <div class="price-info mt-2">
-                              <a href="" class="more-info">MORE INFO</a>
-                              <div>
-                                  <span class="current-price">$199.99</span>
-                                  <span class="original-price">$270.00</span>
-                              </div>
-                          </div>
-                          <div class="row mt-5">
-                          <nav>
-                              <ul>
-                                  <li class="lok-insd mb-2"><a href="" class="fnt-clr">ADD TO CART <span>- $149.99</span></a></li>
-                                  <li class="navContact lok-insd-new" data-target=".services">BACK</li>
-                              </ul>
-                          </nav>
-                          <p class="text-center">100% Satisfaction Guaranteed</p>
-                      </div>
-                      </div>
-                  </div>
-              </div> --}}
             </div>
         </div>
       </div>

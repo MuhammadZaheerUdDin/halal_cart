@@ -56,4 +56,14 @@ class Product extends Model
     {
         return $this->hasOne(ProductVariant::class)->latest();
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function averageRating()
+    {
+        return $this->ratings()->avg('rating');
+    }
 }

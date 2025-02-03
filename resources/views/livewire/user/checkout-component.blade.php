@@ -247,7 +247,13 @@
                                     <b>Total :</b>
                                 </div>
                                 <div class="col-md-6" align="right">
-                                    {{-- <b>$ @if(empty($cart)){{ '0' }} @else{{ sum($cart_item->total) }} @endif</b>  --}}
+                                    <b>$
+                                        @if(empty($cart))
+                                            {{ '0' }}
+                                        @else
+                                            {{ $cart->sum('total') }}
+                                         @endif
+                                    </b> 
                                 </div>
                             </div>
                         </div>

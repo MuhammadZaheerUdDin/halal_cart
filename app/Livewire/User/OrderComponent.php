@@ -4,7 +4,10 @@ namespace App\Livewire\User;
 
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\Rating;
 use App\Repositories\OrderRepository;
+use Illuminate\Container\Attributes\Auth;
+use Illuminate\Http\Request;
 use Livewire\Component;
 
 class OrderComponent extends Component
@@ -41,5 +44,25 @@ class OrderComponent extends Component
             $this->status = 'all';
             // $product_orders = $this->orderRepository->getAll();
         }
+    }
+    public function store(Request $request, $product_id)
+    {
+        $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'review' => 'nullable|string|max:500',
+        ]);
+
+        Rating::updateOrCreate(
+            [
+                'user_id' => Auth::user()->id(),
+                'product_id' => $product_id,
+            ],
+            [
+                'rating' => $request->rating,
+                'review' => $request->review,
+            ]
+        );
+
+        return redirect()->back()->with('success', 'Rating submitted successfully!');
     }
 }
