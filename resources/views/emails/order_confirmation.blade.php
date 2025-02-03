@@ -8,7 +8,6 @@
 </head>
 <body>
     <h2>
-        <img src="{{ asset('assets/imgs/meet-logo.png') }}" alt="Client Logo" width="5%" />
         Thank you for your order, {{ $order->user->name }}!
     </h2>
 
@@ -28,6 +27,10 @@
     <p>We will notify you once your order is shipped.</p>
     <p>Thank you for shopping with us!</p>
 
-    <p>Best Regards,<br> My Halal Cart</p>
+    <p>Best Regards,<br>
+         My Halal Cart
+        <br>
+        <img src="{{ asset('assets/imgs/meet-logo.png') }}" alt="Client Logo" width="5%" />
+    </p>
 </body>
 </html>
