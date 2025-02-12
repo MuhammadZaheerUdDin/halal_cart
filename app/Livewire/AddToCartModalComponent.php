@@ -105,6 +105,7 @@ class AddToCartModalComponent extends Component
             // \Cart::add($variant, $this->quantity);
             $metadata = json_encode($variant);
             $this->cartRepository->addItem($cart, $this->product, $this->quantity, $variant->id, $price , $total, $metadata);
+            $this->dispatch('cartUpdated'); // Notify cart icon component
             session()->flash('success', 'Product added to cart successfully.');
         }else{
             session()->flash('error', 'Please Login.');

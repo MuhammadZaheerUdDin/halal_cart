@@ -128,6 +128,11 @@ class CheckoutComponent extends Component
         
         return view('livewire.user.checkout-component',compact('cart','states'))->layout('layouts.app');
     }
+    
+    public function closeModal()
+    {
+        $this->show_address = false;
+    }
 
     public function editAddress(){
         $this->show_address=true;

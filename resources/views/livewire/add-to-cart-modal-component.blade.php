@@ -89,7 +89,7 @@
                               <button class="add-to-cart" wire:click="addToCart">Add to Cart <i class="fa-solid fa-bag-shopping"></i></button>
                           </div>
                           <div class="col-md-3 col-sm-3 text-center mt-2 payout-btn">
-                            <a href="payout" class="text-dark" id="">Payout</a>
+                            <a href="{{ asset('checkout') }}" class="text-dark" id="">Checkout</a>
                           </div>
                       </div>
                     </div>

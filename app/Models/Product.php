@@ -11,7 +11,11 @@ class Product extends Model
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
     
-    protected $fillable = ['name', 'description', 'price', 'stock', 'sku', 'image', 'category_id','subcategory_id'];
+    protected $fillable = ['name', 'description', 'price', 'stock', 'sku', 'image', 'category_id','subcategory_id','ingredients'];
+
+    // protected $casts = [
+    //     'ingredients' => 'array',
+    // ];
 
     protected static function boot()
     {
@@ -27,7 +31,7 @@ class Product extends Model
             }
         });
     }
-
+    
     public function category()
     {
         return $this->belongsTo(Category::class);

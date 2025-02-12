@@ -125,11 +125,10 @@
             
             
             
-        .s-h {
-          display: none; /* Hide sections by default */
-          /* opacity: 0;
-          transition: opacity 0.5s ease-in-out; */
-        }
+        /* .s-h {
+          display: none; 
+        } 
+        */
         /* .s-h.active {
           display: block;
           opacity: 1;
@@ -141,60 +140,66 @@
     <section class="service-area">
       <div class="container py-5">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-            <div class="row g-4" style="justify-content: flex-start !important;">
+          <div class="row g-4" style="justify-content: flex-start !important;">
+            @foreach ($products as $product)
               <div class="col-md-4 col-lg-4 col-xl-4 col-sm-12 col-xs-12 services s-h" style="flex: none !important;">
-                <div class="product-card">
-                  <div class="product-hide">
+                <div class="product-card" >
+                  <div class="product-hide{{ $product->id }}" style="{{ isset($visibleProducts[$product->id]) && $visibleProducts[$product->id] ? 'display: none;' : '' }}"
+                    >
                       <div class="product-card__figure">
-                        <img src="{{ asset('storage/'.$products[0]->image) }}" alt="Halal Box - Best of Boxed Halal"class="product-card__image product-card__image--primary">
-                        <img src="{{ asset('storage/'.$products[0]->image) }}"alt="Halal Box - Best of Boxed Halal" 
+                        <img src="{{ asset('storage/'.$product->image) }}" alt="Halal Box - Best of Boxed Halal"class="product-card__image product-card__image--primary">
+                        <img src="{{ asset('storage/'.$product->image) }}"alt="Halal Box - Best of Boxed Halal" 
                             class="product-card__image product-card__image--secondary">
                       </div>
                       <div class="product-card__info">
                         {{-- <div class="stars1">★★★★ <span style="font-size: 12px; color: black;"> (4.5)</span></div> --}}
-                        <a href="/products/best-of-boxed-halal" class="product-title">{{ $products[0]->name }}</a>
-                        <p class="custom-description">{{ $products[0]->description }}</p>
+                        <a href="/products/best-of-boxed-halal" class="product-title">{{ $product->name }}</a>
+                        <p class="custom-description">{{ $product->description }}</p>
                         <div class="row">
                           <nav>
                             <ul>
                               <li class="lok-insd mb-2" >
-                                <a  wire:click="$dispatch('openAddToCartModal', [{{ $products[0]->id }}])" style="cursor:pointer" class="fnt-clr">ADD TO CART <span>- {{ $products[0]->variants[0]->price }}</span></a></li>
-                              <li class="navContact lok-insd-new" data-target=".contact">LOOK INSIDE THE BOX</li>
+                                <a  wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])" style="cursor:pointer" class="fnt-clr">ADD TO CART <span>- {{ $product->variants[0]->price }}</span></a></li>
+                              <li class="navContact lok-insd-new" data-target=".contact"  wire:click="toggleVisibility({{ $product->id }})">LOOK INSIDE THE BOX</li>
                             </ul>
                           </nav>
                         </div>
                       </div>
                   </div>
-                  <div class="product-card_new">
+                  <div class="product-card_new{{ $product->id }}" style="{{ isset($visibleProducts[$product->id]) && $visibleProducts[$product->id] ? '' : 'display: none;' }}"
+                    >
                     <a href="/products/boxed-halal-wagyu-box" class="product-title h6 " data-instant=""><span>Boxed Halal - Wagyu Box</span></a>
                     <p class="text-lft">Includes:</p>
                     <div class="ro-stl">
                         <ul>
-                            <li>10 oz Wagyu New York Strips (1x)</li>
-                            <li>10 oz Wagyu Ribeye Steaks (2x)</li>
-                            <li>1 lb Wagyu Burger (2x)</li>
+                          @foreach(explode(',', $product->ingredients) as $item)
+                          <li>{{ trim($item) }}</li>
+                          @endforeach
                         </ul>
                     </div>
                     <div class="price-info mt-2">
                         {{-- <a href="" class="more-info">MORE INFO</a> --}}
                         <div>
-                            <span class="current-price">{{ $products[0]->price }}</span>
-                            <span class="original-price">$270.00</span>
+                            <span class="current-price">${{ $product->price }}</span>
+                            {{-- <span class="original-price">$270.00</span> --}}
                         </div>
                     </div>
                     <div class="row mt-5">
                       <nav>
                           <ul>
                               {{-- <li class="lok-insd mb-2"><a wire:click="$dispatch('openAddToCartModal', [63])" class="fnt-clr">ADD TO CART <span>- $149.99</span></a></li> --}}
-                              <li class="navContact lok-insd-new back-btn" data-target=".services">BACK</li>
+                              <li class="navContact lok-insd-new back-btn" wire:click="toggleVisibility({{ $product->id }})" data-target=".services">BACK</li>
                           </ul>
                       </nav>
                       <p class="text-center">100% Satisfaction Guaranteed</p>
                     </div>
                   </div>
                 </div>
-            </div>
-        </div>
+              </div>
+
+            @endforeach
+
+          </div>
       </div>
     </section>
 

@@ -6,6 +6,8 @@ use App\Models\Order;
 use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Ptondereau\LaravelUpsApi\Facades\UpsTracking;
+use Ptondereau\LaravelUpsApi\UpsApiServiceProvider;
 
 class OrderComponent extends Component
 {
@@ -32,6 +34,9 @@ class OrderComponent extends Component
 
     public function updateStatus($product_id)
     {
+        // $ups = new UpsTracking();
+        // dd($ups->track('123'));
+        // $ups->
         // Find the order by ID
         $order = Order::findOrFail($product_id);
     

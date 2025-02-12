@@ -81,6 +81,7 @@
             <div class="col-span-2 md:col-span-2">
                 <label class="block">
                     <span class="text-sm text-slate-500">Choose Product Profile Image</span>
+                    <div style="text-align:center">
                     <input type="file" id="" wire:model="image"  class="block w-full text-sm text-slate-500
                         file:mr-4 file:py-2 file:px-4
                         file:rounded-full file:border-0
@@ -88,6 +89,7 @@
                         file:bg-violet-50 file:text-violet-700
                         hover:file:bg-violet-100
                     " />
+                    </div>
                 </label>
                 @error('image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                <!-- error('image') 
@@ -97,15 +99,26 @@
             </div>
 
                 <!-- Description -->
+            <div>
             <div class="col-span-2 md:col-span-1">
                 <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
-                <textarea id="description" wire:model="description" rows="10" 
+                <textarea id="description" wire:model="description" rows="5" 
                         class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"></textarea>
                 @error('description') 
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
-            <!-- Product Variants-->
+                <!-- Ingredients -->
+            <div class="col-span-2 md:col-span-1">
+                <label for="ingredients" class="block text-sm font-medium text-gray-700">Ingredients / Box Items:</label>
+                <textarea id="ingredients" wire:model="ingredients" rows="5" placeholder="Enter ingredients, separated by commas"
+                        class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"></textarea>
+                @error('ingredients') 
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+            </div>
+                <!-- Product Variants-->
             <div class=" md:col-span-1 border-div">
                 <div class="col-span-2">
                     <h3 class="font-bold mb-2">Add Variants</h3>

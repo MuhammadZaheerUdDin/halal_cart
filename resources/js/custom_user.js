@@ -52,23 +52,23 @@ if (dots) {
 // <!-- news-slider -->
     $(document).ready(function () {      
       // alert('za');
-      $(".product-hide").show();
-      $(".product-card_new").hide();
-      $("nav ul li").click(function() {
-        var target = $(this).data("target");
-        if (target) {
-          if ($(this).hasClass("back-btn")) {
-            // Logic for the back button
-            $(".product-hide").show(); // Hide all other sections
-            $(".product-card_new").hide(); // Show the main "services" section
-          }else{
-            $(".product-hide").hide(); // Hide all sections        
-            $(".product-card_new").show();
-          }
-                    // var target = $(this).attr("data-target"); // Get the target class
-          // $(target).show(); // Show the targeted section
-        }
-      });
+      // $(".product-hide").show();
+      // $(".product-card_new").hide();
+      // $("nav ul li").click(function() {
+      //   var target = $(this).data("target");
+      //   if (target) {
+      //     if ($(this).hasClass("back-btn")) {
+      //       // Logic for the back button
+      //       $(".product-hide").show(); // Hide all other sections
+      //       $(".product-card_new").hide(); // Show the main "services" section
+      //     }else{
+      //       $(".product-hide").hide(); // Hide all sections        
+      //       $(".product-card_new").show();
+      //     }
+      //               // var target = $(this).attr("data-target"); // Get the target class
+      //     // $(target).show(); // Show the targeted section
+      //   }
+      // });
     //   $(".s-h").removeClass("active"); // Hide all sections
     //   $(".services").addClass("active"); // Show the default section
     //   $("nav ul li").click(function () {

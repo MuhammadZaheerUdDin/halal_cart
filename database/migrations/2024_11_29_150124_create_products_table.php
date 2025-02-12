@@ -26,6 +26,7 @@ return new class extends Migration
             //new lines added
             $table->string('code')->nullable();
             $table->string('slug');
+            $table->json('ingredients')->nullable(); // Store as plain text
             $table->integer('brand_id')->nullable();
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();

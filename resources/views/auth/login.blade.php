@@ -57,7 +57,7 @@
                         <img src="{{ url('assets/imgs/meet-logo.png') }}" class="wid-img">
                     </span>
                     
-                    <a href="#" class="btn-face m-b-20" style="height:45px">
+                    {{-- <a href="#" class="btn-face m-b-20" style="height:45px">
                         <i class="fa fa-facebook-official"></i>
                         Facebook
                     </a>
@@ -65,7 +65,7 @@
                     <a href="#" class="btn-google m-b-20" style="height:45px">
                         <img src="assets/imgs/icons/icon-google.png" alt="GOOGLE">
                         Google
-                    </a>
+                    </a> --}}
                     <div class="col-md-12">
                     <x-validation-errors class="mb-4" />
                     {{-- @session('status')

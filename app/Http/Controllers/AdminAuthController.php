@@ -23,8 +23,8 @@ class AdminAuthController extends Controller
 
     public function showLoginForm()
     {
-        if(empty(Auth::user())){
-            if(!empty(Auth::user()->id) && empty(Auth::user()->user_roles)){
+        if(!empty(Auth::user())){
+            if(empty(Auth::user()->user_roles)){
                 Auth::logout(); // Log the user out
                 Session::flush(); // Clear the session data
                 return redirect('/login')->with('message', 'You have been logged out due to missing user roles.');            

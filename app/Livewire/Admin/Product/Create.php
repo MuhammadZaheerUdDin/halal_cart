@@ -16,6 +16,7 @@ class Create extends Component
     use WithFileUploads;
 
     public $products, $variants = [], $images = [], $previewImages = [];
+    public $ingredients = null  ;
     public $name, $description, $price, $stock, $sku, $category_id, $subcategory_id, $is_disabled, $image, $productId, $categories, $subcategories, $product_images_old;
     
     public $variant_name
@@ -41,13 +42,14 @@ class Create extends Component
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'ingredients' => 'nullable|string',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'sku' => 'required|string|max:100|unique:products,sku' . ($this->productId ? ",$this->productId" : ''),
             // 'category_id' => 'required|integer|exists:categories,id',
             'subcategory_id' => 'required|integer|exists:sub_categories,id',
-            'images.*' => 'nullable|max:2048', // Image validation
-            'image' => 'nullable|max:2048', // 2MB max
+            'images.*' => 'nullable|max:20048', // Image validation
+            'image' => 'nullable|max:20048', // 2MB max
         ];
     }
 
@@ -103,6 +105,7 @@ class Create extends Component
         $product = Product::create([
             'name' => $this->name,
             'description' => $this->description,
+            'ingredients' => $this->ingredients,
             'price' => $this->price,
             'stock' => $this->stock,
             'sku' => $this->sku,
@@ -112,13 +115,23 @@ class Create extends Component
         ]);
 
         // Save Variants
-        foreach ($this->variants as $variant) {
+        if(!empty($this->variants)){
+            foreach ($this->variants as $variant) {
+                ProductVariant::create([
+                    'product_id' => $product->id,
+                    'variant_name' => $variant['name'],
+                    'variant_value' => $variant['value'],
+                    'price' => $variant['price'],
+                    'stock' => $variant['stock'],
+                ]);
+            }
+        }else{
             ProductVariant::create([
                 'product_id' => $product->id,
-                'variant_name' => $variant['name'],
-                'variant_value' => $variant['value'],
-                'price' => $variant['price'],
-                'stock' => $variant['stock'],
+                'variant_name' => "lbs",
+                'variant_value' => "2",
+                'price' => $product->price,
+                'stock' => $product->stock,
             ]);
         }
 
@@ -209,7 +222,7 @@ class Create extends Component
 
         // Update images
         if(!empty($this->images)){
-            dd($this->images);
+            // dd($this->images);
             foreach ($this->images as $image) {
                 $path = $image->store('product_images','public');
                 ProductImage::create([

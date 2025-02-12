@@ -37,7 +37,7 @@
                             @if($show_address)
                             <div class="modal" style="display: flex;">
                                 <div class="modal-content aut-scrol">
-                                    <div class="modal-header header-bar" style="padding: 0px 10px 12px 12px !important;">
+                                    <div class="modal-header header-bar" style="padding: 0px 10px 12px 12px !important;" style="">
                                         <span class="fnt-16">Update Address</span>
                                         <span class="close-button0" id="closeModal" wire:click="closeModal">&times;</span>
                                     </div>

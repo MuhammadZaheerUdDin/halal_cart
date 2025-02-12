@@ -17,7 +17,7 @@
                 <!-- Filter Sidebar -->
                 <div class="col-md-3">
                     <div class="filter-section">
-                        <button class="filter-button" id="filterButton">
+                        {{-- <button class="filter-button" id="filterButton">
                             <span>Filter</span>
                             <span class="filter-icon">
                               <!-- Icon as SVG -->
@@ -25,7 +25,7 @@
                                 <path d="M10 18h4v-2h-4v2zm-7-5h18v-2H3v2zm3-7v2h12V6H6z"/>
                               </svg>
                             </span>
-                          </button>
+                          </button> --}}
                           <!-- Modal -->
                           {{-- <div class="modal" id="filterModal">
                             <div class="modal-content">
@@ -96,8 +96,8 @@
                             </div>
                           </div> --}}
 
-                        <hr>
-                        <div class="rating-section">
+                        {{-- <hr> --}}
+                        {{-- <div class="rating-section">
                           <h3>Rating</h3>
                           <div class="rating-option">
                             <input type="checkbox" id="rating-5" />
@@ -129,13 +129,13 @@
                               <span class="stars">★☆☆☆☆ <span style="color: black;">1.0 & up</span></span>
                             </label>
                           </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
 
                 <!-- Product Grid -->
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="d-flex justify-content-between mb-4">
                         <div>
                             <label for="sort" class="form-label">Sort by:</label>

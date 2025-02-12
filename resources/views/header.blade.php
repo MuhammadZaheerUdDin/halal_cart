@@ -43,7 +43,8 @@
                                 </x-responsive-nav-link>    
                             @endif
                         </ul>
-                        <a href="{{ route('cart') }}" id="openMenuBtn"><i class="fas fa-shopping-cart"></i></a>
+                        {{-- <a href="{{ route('cart') }}" id="openMenuBtn"><i class="fas fa-shopping-cart"></i></a> --}}
+                        <livewire:cart-icon>
                     </div>
                 </div>
             </div>
