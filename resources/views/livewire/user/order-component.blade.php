@@ -44,6 +44,19 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center text-lg-start">
           <h2 class="text-uppercase text-dark text-center">Orders</h2>
           <div class="orders-container">
+            <div class="d-flex justify-content-between mb-4">
+              <div>
+                  <label for="sort" class="form-label">Sort by:</label>
+                  <input type="date" wire:model="selected_date" class="form-control">
+                  {{-- <select id="sort" class="form-select d-inline w-auto">
+                      <option value="latest">Latest</option>
+                      <option value="price-low">Price: Low to High</option>
+                      <option value="price-high">Price: High to Low</option>
+                  </select> --}}
+              </div>
+              <div>{{ $product_orders->count() }} Results Found</div>
+          </div>
+
               <div class="tabs">
                 <button class="tab-button @if($status=='all') active @endif" wire:click="showTab('all')">All</button>
                 <button class="tab-button @if($status=='paid') active @endif" wire:click="showTab('paid')">Pending</button>
@@ -56,20 +69,40 @@
                 <!-- All Orders Tab -->
                 <div class="order-list" id="all">
                   @foreach ($product_orders as $product_order)
-                    @foreach ($product_order->orderProducts as $order)
-                      <a class="order-item">
-                        {{-- <a class="order-item" href="cancelation.html"> --}}
-                          <div class="order-details">
-                          <img src="{{ asset('storage/'.$order->product->image) }}">
-                          <div class="details">
-                            <p><strong>Fresh Boneless Meat</strong></p>
-                            <p>Rs. {{ $order->price }}</p>
-                            <p>Qty: {{ $order->quantity }}</p>
-                          </div>
+                    <div class="orders-container orders">
+                      <div class="order-header">
+                        <h1>Order # {{ $product_order->order_number }}</h1>
+                        <span>Date : {{ $product_order->created_at->format('d M Y') }} </span>
+                        <div class="status completed">
+                          @if(!empty($product_order->status)) {{ $product_order->status }} @endif
                         </div>
-                        <div class="status completed">@if(!empty($product_order->status)) {{ $order->status }} @endif</div>
-                      </a>
-                    @endforeach
+                      </div>
+                      <div  style="display: block; width: 100%; margin-top: 10px; clear: both;">
+                        <button class="btn viw-btn0" wire:click="toggleVisibility({{ $product_order->id }})">Details</button>
+                      </div>
+
+                      <div>
+                        @if(!empty(!empty($visibleProducts[$product_order->id])))
+                          @foreach ($product_order->orderProducts as $order)
+                            <a class="order-item ">
+                                <div class="order-details-40 order-body" style="color: #333;"> 
+                                  <img src="{{ asset('storage/'.$order->product->image) }}" loading="lazy" style="height:40px; border-radius:6px;">
+                                    <p><strong>{{$order->product->name}}</strong></p>
+                                    <p>${{ $order->price }} / Qty:{{ $order->quantity }}</p>
+                                </div>
+                            </a>
+                          @endforeach
+                        @endif
+
+                        {{-- <div class="order-header">
+                          <h1>Order # {{ $product_order->order_number }}</h1>
+                          <span>Date : {{ $product_order->created_at->format('d M Y') }} </span>
+                          <div class="status completed">
+                            @if(!empty($product_order->status)) {{ $product_order->status }} @endif
+                          </div>
+                        </div> --}}
+                      </div>
+                    </div>
                   @endforeach
                 </div>
               @else

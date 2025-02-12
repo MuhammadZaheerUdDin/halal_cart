@@ -8430,6 +8430,8 @@ span.right{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
   
   .order-item:last-child {
@@ -8445,6 +8447,16 @@ span.right{
   .order-details img {
     width: 80px;
     height: 80px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+.order-details-40 {
+    display: flex;
+    gap: 25px;
+    flex: 1;
+
+    width: 40px;
+    height: 40px;
     border-radius: 4px;
     object-fit: cover;
 }
@@ -8501,4 +8513,42 @@ span.right{
     color: #c10000;
     font-weight: bold;
     margin-left: 39px;
+}
+
+.orders{
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-top: 3px solid rgb(214 201 54);
+    border-bottom: 3px solid rgb(214 201 54);
+}
+.orders-container {
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.order-header{
+    display: flex    ;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.order-header h1 {
+    font-size: 20px;
+    color: #333;
+}
+.order-body{
+    display: flex    ;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+.status.completed {
+    background: #d4edda;
+    color: #155724;
 }

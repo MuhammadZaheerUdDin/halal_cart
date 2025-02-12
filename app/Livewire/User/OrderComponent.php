@@ -14,6 +14,7 @@ class OrderComponent extends Component
 {
     private $orderRepository;
     public $status = 'all';
+    public $visibleProducts = [];
 
     public function __construct()
     {
@@ -65,4 +66,14 @@ class OrderComponent extends Component
 
         return redirect()->back()->with('success', 'Rating submitted successfully!');
     }
+
+    public function toggleVisibility($product_id)
+    {
+        if (isset($this->visibleProducts[$product_id]) && $this->visibleProducts[$product_id]) {
+            $this->visibleProducts[$product_id] = false;
+        } else {
+            $this->visibleProducts[$product_id] = true;
+        }
+    }
+
 }
