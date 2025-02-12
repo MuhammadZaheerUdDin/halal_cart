@@ -159,7 +159,7 @@
                           <nav>
                             <ul>
                               <li class="lok-insd mb-2" >
-                                <a  wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])" style="cursor:pointer" class="fnt-clr">ADD TO CART <span>- {{ $product->variants[0]->price }}</span></a></li>
+                                <a  wire:click="$dispatch('openAddToCartModal', [{{ $product->id }}])" style="cursor:pointer" class="fnt-clr">ADD TO CART <span>- ${{ $product->variants[0]->price }}</span></a></li>
                               <li class="navContact lok-insd-new" data-target=".contact"  wire:click="toggleVisibility({{ $product->id }})">LOOK INSIDE THE BOX</li>
                             </ul>
                           </nav>

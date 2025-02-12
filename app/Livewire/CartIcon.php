@@ -30,8 +30,6 @@ class CartIcon extends Component
     public function render()
     {
         if(!empty(Auth::user())){
-            // $this->cart_count = Cart::where('user_id',Auth::user()->id)->with('items')->count(); // Initialize cart count
-            // $this->cart_count = Cart::where('user_id', Auth::id())->withCount('items')->first()?->items_count ?? 0;
             $this->cart_count = CartItem::whereHas('cart', function ($query) {
                 $query->where('user_id', Auth::id());
             })->sum('quantity');
