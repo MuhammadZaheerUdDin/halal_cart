@@ -84,7 +84,7 @@
                       </div>
                       <div class="col-md-12" style="display: flex">
                         @if(!empty(!empty($visibleProducts[$product_order->id])))
-                          <div class="col-md-8">
+                          <div class="col-md-8 order-item">
                               @foreach ($product_order->orderProducts as $order)
                                 <a class="order-item col-md-8">
                                     <div class="order-details-40 order-body" style="color: #333;"> 
@@ -95,9 +95,9 @@
                                 </a>
                               @endforeach
                           </div>
-                          <div class="col-md-4" style="text-align: center;">
+                          <div class="col-md-4" >
                             <a class="order-item " >
-                              <div class="order-details-40 " style="color: #333;"> 
+                              <div class="" style="color: #333;"> 
                                   <p><b>Total AMount: ${{ $product_order->total }}</b></p>
                               </div>
                             </a>
