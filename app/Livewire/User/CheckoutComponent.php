@@ -178,6 +178,7 @@ class CheckoutComponent extends Component
 
     public function checkout(Request $request)//: RedirectResponse
     {
+        $fair_charges = 0;
         DB::beginTransaction();
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         try{
@@ -203,6 +204,7 @@ class CheckoutComponent extends Component
                     return redirect()->back()->with(['error'=>'Something went wrong.']);
                 }
             }
+            $t_price = $t_price + $fair_charges;
             $charge = Stripe\Charge::create ([
                 "amount" => $t_price*100 ,
                 "currency" => "usd",

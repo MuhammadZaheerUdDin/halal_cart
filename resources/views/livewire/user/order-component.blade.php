@@ -69,12 +69,12 @@
               </div>
               @if(!empty($product_orders[0]))
                 <!-- All Orders Tab -->
-                <div class="order-list" id="all">
+                <div class="order-list  col-md-7" id="all">
                   @foreach ($product_orders as $product_order)
                     <div class="order-container orders">
                       <div class="order-header">
-                        <h1>Order # {{ $product_order->order_number }}</h1>
-                        <span>Date : {{ $product_order->created_at->format('d-m-Y') }} </span>
+                        <h1>Order # <br><span>{{ $product_order->order_number }}</span></h1>
+                        <h1>Date : <br><span>{{ $product_order->created_at->format('d-m-Y') }} </span></h1>
                         <div class="status completed">
                           @if(!empty($product_order->status)) {{ $product_order->status }} @endif
                         </div>
@@ -82,27 +82,27 @@
                       <div  style="display: block; width: 100%; clear: both;text-align:center">
                         <button class="btn viw-btn0" wire:click="toggleVisibility({{ $product_order->id }})">Details</button>
                       </div>
-
-                      <div>
+                      <div class="col-md-12" style="display: flex">
                         @if(!empty(!empty($visibleProducts[$product_order->id])))
-                          @foreach ($product_order->orderProducts as $order)
-                            <a class="order-item ">
-                                <div class="order-details-40 order-body" style="color: #333;"> 
-                                  <img src="{{ asset('storage/'.$order->product->image) }}" loading="lazy" style="height:40px; border-radius:6px;">
-                                    <p><strong>{{$order->product->name}}</strong></p>
-                                    <p>${{ $order->price }} / Qty:{{ $order->quantity }}</p>
-                                </div>
-                            </a>
-                          @endforeach
-                        @endif
-
-                        {{-- <div class="order-header">
-                          <h1>Order # {{ $product_order->order_number }}</h1>
-                          <span>Date : {{ $product_order->created_at->format('d M Y') }} </span>
-                          <div class="status completed">
-                            @if(!empty($product_order->status)) {{ $product_order->status }} @endif
+                          <div class="col-md-8">
+                              @foreach ($product_order->orderProducts as $order)
+                                <a class="order-item col-md-8">
+                                    <div class="order-details-40 order-body" style="color: #333;"> 
+                                      <img src="{{ asset('storage/'.$order->product->image) }}" loading="lazy" style=" border-radius:6px;">
+                                        <p><strong>{{$order->product->name}}</strong></p>
+                                        <p>Qty:{{ $order->quantity }} / ${{ $order->price }}</p>
+                                    </div>
+                                </a>
+                              @endforeach
                           </div>
-                        </div> --}}
+                          <div class="col-md-4" style="text-align: center;">
+                            <a class="order-item " >
+                              <div class="order-details-40 " style="color: #333;"> 
+                                  <p><b>Total AMount: ${{ $product_order->total }}</b></p>
+                              </div>
+                            </a>
+                          </div>
+                        @endif
                       </div>
                     </div>
                   @endforeach
