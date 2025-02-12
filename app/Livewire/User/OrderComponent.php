@@ -26,20 +26,19 @@ class OrderComponent extends Component
         // $product_orders = OrderProduct::all();
         // $product_orders = $this->orderRepository->getAll();
         $status = $this->status;
-        if($this->status == 'paid' || $status == 'processing' || $this->status == 'shipped' || $this->status == 'review' || $this->status == 'completed'){
-            // if($status == 'paid' || $status =='pending'){
-            //     $status = 'paid';
-            // }
+        // dd($this->status);
+        if($this->status == 'paid' || $status == 'processing' || $this->status == 'shipped' || $this->status == 'review' || $this->status == 'completed' || $this->status == 'cancelled'){
             $product_orders = $this->orderRepository->getAll(['status'=> $status]);
         }else{
             $product_orders = $this->orderRepository->getAll();
         }
+        // dd($product_orders);
 
         return view('livewire.user.order-component',compact('product_orders'))->layout('layouts.app');
     }
 
     public function showTab($status){
-        if($status == 'paid' || $status == 'processing' || $status == 'shipped' || $status == 'review' || $status == 'completed'){
+        if($status == 'paid' || $status == 'processing' || $status == 'shipped' || $status == 'review' || $status == 'completed' || $status == 'cancelled'){
             $this->status = $status;
         }else{
             $this->status = 'all';

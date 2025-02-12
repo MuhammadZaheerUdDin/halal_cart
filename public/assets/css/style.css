@@ -8426,7 +8426,7 @@ span.right{
   
   .order-item {
     border-bottom: 1px solid #ddd;
-    padding: 15px 0;
+    padding: 15px 2px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -8520,10 +8520,10 @@ span.right{
     border-top: 3px solid rgb(214 201 54);
     border-bottom: 3px solid rgb(214 201 54);
 }
-.orders-container {
+.order-container {
     margin: 20px auto;
     background: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -8533,19 +8533,26 @@ span.right{
     align-items: center;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
-    margin-bottom: 20px;
+    /* margin-bottom: 10px; */
 }
 .order-header h1 {
     font-size: 20px;
     color: #333;
 }
+@media (max-width: 400px) {
+    .order-header h1 {
+        font-size: 15px;
+        /* color: #333; */
+    }
+}
+
 .order-body{
     display: flex    ;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    /* border-bottom: 1px solid #ddd; */
+    /* padding-bottom: 10px; */
+    /* margin-bottom: 20px; */
     border-radius: 8px;
 }
 .status.completed {

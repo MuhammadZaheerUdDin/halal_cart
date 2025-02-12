@@ -64,20 +64,22 @@
                 <button class="tab-button @if($status=='shipped') active @endif" wire:click="showTab('shipped')">Shipped</button>
                 {{-- <button class="tab-button @if($status=='review') active @endif" wire:click="showTab('review')">To Review</button> --}}
                 <button class="tab-button @if($status=='completed') active @endif" wire:click="showTab('completed')">Completed</button>
+                <button class="tab-button @if($status=='cancelled') active @endif" wire:click="showTab('cancelled')">Cancelled</button>
+
               </div>
               @if(!empty($product_orders[0]))
                 <!-- All Orders Tab -->
                 <div class="order-list" id="all">
                   @foreach ($product_orders as $product_order)
-                    <div class="orders-container orders">
+                    <div class="order-container orders">
                       <div class="order-header">
                         <h1>Order # {{ $product_order->order_number }}</h1>
-                        <span>Date : {{ $product_order->created_at->format('d M Y') }} </span>
+                        <span>Date : {{ $product_order->created_at->format('d-m-Y') }} </span>
                         <div class="status completed">
                           @if(!empty($product_order->status)) {{ $product_order->status }} @endif
                         </div>
                       </div>
-                      <div  style="display: block; width: 100%; margin-top: 10px; clear: both;">
+                      <div  style="display: block; width: 100%; clear: both;text-align:center">
                         <button class="btn viw-btn0" wire:click="toggleVisibility({{ $product_order->id }})">Details</button>
                       </div>
 
