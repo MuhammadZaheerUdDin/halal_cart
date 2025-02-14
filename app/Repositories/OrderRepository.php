@@ -42,14 +42,14 @@ class OrderRepository
                 $query->whereBetween('created_at', [$filters['start_date'], $filters['end_date']]);
                 // dd($filters);
             }else{
-                $end_date = Carbon::today(); // 2025-01-16 2025-02-12 
+                $end_date = Carbon::tomorrow(); // 2025-01-16 2025-02-12 
                 // Get last month same day
-                $start_date = Carbon::tomorrow()->subMonth(); // 2024-12-16 2025-01-12
+                $start_date = Carbon::today()->subMonth(); // 2024-12-16 2025-01-12
                 $query->whereBetween('created_at', [$start_date, $end_date]);            
             }
+            return $query->with('orderProducts')->orderBy('created_at', 'desc')->get();
         }
-        // dd($query->get());
-        return $query->with('orderProducts')->orderBy('created_at', 'desc')->get();
+        return $query->with('orderProducts')->orderBy('created_at', 'desc')->paginate(5);        
     }
 
     /**

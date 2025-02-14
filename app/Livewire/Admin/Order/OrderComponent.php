@@ -26,6 +26,13 @@ class OrderComponent extends Component
     public function render()
     {
         $status = $this->status;
+        if($this->status == 'paid' || $status == 'processing' || $this->status == 'shipped' || $this->status == 'review' || $this->status == 'completed' || $this->status == 'cancelled'){
+            // $product_orders = $this->orderRepository->getAll(['status'=> $status]);
+            $status = $this->status;
+        }else{
+            $status = null;
+        }
+
         if(!empty($status)){
             $product_orders = $this->orderRepository->getAll(['status'=> $status]);
         }else{
@@ -33,6 +40,15 @@ class OrderComponent extends Component
         }
 
         return view('livewire.admin.order.order-component',compact('product_orders'))->layout('admin.layouts.app');
+    }
+
+    public function showTab($status){
+        if($status == 'paid' || $status == 'processing' || $status == 'shipped' || $status == 'review' || $status == 'completed' || $status == 'cancelled'){
+            $this->status = $status;
+        }else{
+            $this->status = 'all';
+            // $product_orders = $this->orderRepository->getAll();
+        }
     }
 
     public function updateStatus($product_id)

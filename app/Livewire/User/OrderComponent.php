@@ -42,6 +42,8 @@ class OrderComponent extends Component
         if($this->status == 'paid' || $status == 'processing' || $this->status == 'shipped' || $this->status == 'review' || $this->status == 'completed' || $this->status == 'cancelled'){
             // $product_orders = $this->orderRepository->getAll(['status'=> $status]);
             $this->filter['status']=$status;
+        }else{
+            $this->filter['status']= '';
         }
         //else{
         // dd($this->filter);
@@ -60,6 +62,7 @@ class OrderComponent extends Component
             // $product_orders = $this->orderRepository->getAll();
         }
     }
+
     public function store(Request $request, $product_id)
     {
         $request->validate([
