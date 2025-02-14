@@ -231,9 +231,10 @@ class CheckoutComponent extends Component
                     ,'address1'=> $address->address1 ?? null
                     ,'address2'=>$address->address2 ?? null
                     ,'city'=> $address->city ?? null
-                    ,'state'=>$address->state ?? null
-                    ,'postal_code'=>$address->postal_code ?? null
-                    ,'country'=>$address->country ?? null
+                    ,'state'=> $address->state ?? null
+                    ,'postal_code'=> $address->postal_code ?? null
+                    ,'country'=> $address->country ?? null
+                    ,'transaction_id'=> $charge->id
                     ,'status'=>'paid' 
                     ,'is_paid'=>1
                 ];

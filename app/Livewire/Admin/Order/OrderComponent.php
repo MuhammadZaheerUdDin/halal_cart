@@ -4,10 +4,13 @@ namespace App\Livewire\Admin\Order;
 
 use App\Models\Order;
 use App\Repositories\OrderRepository;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Ptondereau\LaravelUpsApi\Facades\UpsTracking;
 use Ptondereau\LaravelUpsApi\UpsApiServiceProvider;
+use Stripe;
+use Stripe\Refund;
 
 class OrderComponent extends Component
 {
@@ -56,24 +59,31 @@ class OrderComponent extends Component
         }
     }
     
-    public function cancelOrder($productId)
+    public function cancelOrder($product_id)
     {
-        $order = Order::findOrFail($productId);
-    
+        $order = Order::findOrFail($product_id);
+        DB::beginTransaction();
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));    
         // Only allow cancellation for certain statuses
         if (in_array($order->status, Order::$cancelableStatuses)) {
-            $order->status = 'canceled';
-            $order->save();
-    
+            $order->status = 'cancelled';
+            $order->save();            
+            // $refund = Stripe\Refund::create([
+            //     'charge' => $order->transaction_id, // ID of the Stripe patment
+            //     // 'amount' => 1000, // Amount in cents (optional, for partial refunds)
+            // ]);    
+            DB::commit();
             session()->flash('message', 'Order has been canceled.');
         } else {
+            DB::rollBack();
             session()->flash('error', 'Order cannot be canceled at this stage.');
         }
+        DB::rollBack();
     }
 
-    public function markFailedDelivery($productId)
+    public function markFailedDelivery($product_id)
     {
-        $order = Order::findOrFail($productId);
+        $order = Order::findOrFail($product_id);
     
         if ($order->status === 'shipped') {
             $order->status = 'failed_delivery';

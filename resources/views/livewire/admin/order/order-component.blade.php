@@ -12,12 +12,12 @@
         </div>
     @endif
 
-    <!-- body  -->
+    <!-- body -->
     <div class=" border-div">
         <button type="button" onclick="window.location.href='{{ route('admin.product.create') }}'"
-            class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Create Product</button>
-
-        {{-- <input type="text" wire:model.live="search" placeholder="Search Products..." class="p-2 border rounded mb-4 w-full"> --}}
+            class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+            Create Product
+        </button>
 
         <!-- Product List -->
         {{-- <table class="w-full border-collapse border border-gray-700 table table-auto  rounded-lg"> --}}
@@ -72,13 +72,15 @@
                                             class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                             {{ ucfirst($product_order->next_status) }}
                                         </button>
+                                    @elseif($product_order->status === 'cancelled')
+                                        <span style="color:red">Cancelled</span>
                                     @else
-                                        <span>Completed</span>
+                                        <span style="color:green">Completed</span>
                                     @endif
                                     @if(in_array($product_order->status, \App\Models\Order::$cancelableStatuses))
                                         <button
-                                        onclick="showConfirmation('markFailedDelivery', {{ $product_order->id }}, 'Mark as Failed Delivery')" 
-                                        {{-- wire:click="cancelOrder({{ $product_order->id }})" --}}
+                                        {{-- onclick="showConfirmation('markFailedDelivery', {{ $product_order->id }}, 'Mark as Failed Delivery')"  --}}
+                                        wire:click="cancelOrder({{ $product_order->id }})"
                                             class="px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                             Cancel Order
                                         </button>

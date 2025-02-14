@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('state');
             $table->string('postal_code');
             $table->string('country');
+            $table->string('transaction_id');
             $table->string('status')->default('pending'); // pending, completed, cancelled
             $table->string('is_paid');
             $table->timestamps();

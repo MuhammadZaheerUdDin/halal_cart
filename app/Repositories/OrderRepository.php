@@ -36,15 +36,19 @@ class OrderRepository
         if (!empty($filters['status'])) {
             $query->where('status', 'like', '%' . $filters['status'] . '%');
         }
-        if (!empty($filters['start_date']) && !empty($filters['end_date'])) {
-            $query->whereBetween('created_at', [$filters['start_date'], $filters['end_date']]);
-        }else{
-            $end_date = Carbon::today(); // 2025-01-16 2025-02-12 
-            // Get last month same day
-            $start_date = Carbon::today()->subMonth(); // 2024-12-16 2025-01-12
-            $query->whereBetween('created_at', [$start_date, $end_date]);            
+            // dd($filters);
+        if(empty(Auth::user()->user_role)){
+            if (!empty($filters['start_date']) && !empty($filters['end_date'])) {
+                $query->whereBetween('created_at', [$filters['start_date'], $filters['end_date']]);
+                // dd($filters);
+            }else{
+                $end_date = Carbon::today(); // 2025-01-16 2025-02-12 
+                // Get last month same day
+                $start_date = Carbon::tomorrow()->subMonth(); // 2024-12-16 2025-01-12
+                $query->whereBetween('created_at', [$start_date, $end_date]);            
+            }
         }
-
+        // dd($query->get());
         return $query->with('orderProducts')->orderBy('created_at', 'desc')->get();
     }
 

@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Rating;
 use App\Repositories\OrderRepository;
+use Carbon\Carbon;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Livewire\Component;
@@ -15,7 +16,8 @@ class OrderComponent extends Component
     private $orderRepository;
     public $status = 'all';
     public $visibleProducts = [];
-
+    public $filter=[];
+    public $selected_date;
     public function __construct()
     {
         $this->orderRepository = app(OrderRepository::class); // Resolve repository instance
@@ -26,12 +28,25 @@ class OrderComponent extends Component
         // $product_orders = OrderProduct::all();
         // $product_orders = $this->orderRepository->getAll();
         $status = $this->status;
+        if(!empty($this->selected_date)){
+            // $this->selected_date
+            $start_date = Carbon::parse($this->selected_date);
+            $end_date = Carbon::parse($start_date)->addMonths(2); // Get the end of the target month
+            $this->filter['start_date'] = $start_date;//->format('d-m-Y');
+            // dd($this->filter['start_date']);
+            $this->filter['end_date'] = $end_date;//->format('d-m-Y');
+            // dd($this->filter);
+        }
+
         // dd($this->status);
         if($this->status == 'paid' || $status == 'processing' || $this->status == 'shipped' || $this->status == 'review' || $this->status == 'completed' || $this->status == 'cancelled'){
-            $product_orders = $this->orderRepository->getAll(['status'=> $status]);
-        }else{
-            $product_orders = $this->orderRepository->getAll();
+            // $product_orders = $this->orderRepository->getAll(['status'=> $status]);
+            $this->filter['status']=$status;
         }
+        //else{
+        // dd($this->filter);
+            $product_orders = $this->orderRepository->getAll($this->filter);
+        // }
         // dd($product_orders);
 
         return view('livewire.user.order-component',compact('product_orders'))->layout('layouts.app');
@@ -73,6 +88,10 @@ class OrderComponent extends Component
         } else {
             $this->visibleProducts[$product_id] = true;
         }
+    }
+    public function clear(){
+        unset($this->filter['start_date']);
+        unset($this->filter['end_date']);
     }
 
 }

@@ -46,8 +46,9 @@
           <div class="orders-container">
             <div class="d-flex justify-content-between mb-4">
               <div>
-                  <label for="sort" class="form-label">Sort by:</label>
-                  <input type="date" wire:model="selected_date" class="form-control">
+                  <label for="sort" class="form-label">Sort by: (2 months result)</label>
+                  <input type="date" wire:model.lazy="selected_date" class="form-control">
+                  <button class="btn" wire:click="clear"> Clear</button>
                   {{-- <select id="sort" class="form-select d-inline w-auto">
                       <option value="latest">Latest</option>
                       <option value="price-low">Price: Low to High</option>
@@ -84,9 +85,9 @@
                       </div>
                       <div class="col-md-12" style="display: flex">
                         @if(!empty(!empty($visibleProducts[$product_order->id])))
-                          <div class="col-md-8 order-item">
+                          <div class="col-md-8 ">
                               @foreach ($product_order->orderProducts as $order)
-                                <a class="order-item col-md-8">
+                                <a class="order-item col-md-11">
                                     <div class="order-details-40 order-body" style="color: #333;"> 
                                       <img src="{{ asset('storage/'.$order->product->image) }}" loading="lazy" style=" border-radius:6px;">
                                         <p><strong>{{$order->product->name}}</strong></p>
