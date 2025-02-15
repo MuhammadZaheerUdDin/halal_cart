@@ -17,7 +17,7 @@ class OrderComponent extends Component
     protected $listeners = ['updateStatus','cancelOrder'];
 
     private $orderRepository;
-    public $status = null;
+    public $status = 'all';
 
     public function __construct()
     {

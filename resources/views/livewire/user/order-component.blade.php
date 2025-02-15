@@ -9,7 +9,7 @@
               </div>
           </div>
       </div>
-  </section>
+    </section>
 
         <!-- 3d sec -->
 
