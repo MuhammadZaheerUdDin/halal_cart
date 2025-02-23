@@ -156,7 +156,7 @@
 
                     <div class="w-full text-center p-t-35">
                         <span class="txt2">
-                            Not a member?
+                            Member ?
                         </span>
 
                         <a href="{{ url('login') }}" class="txt2 bo1">

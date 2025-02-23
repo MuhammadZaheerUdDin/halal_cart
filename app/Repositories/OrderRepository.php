@@ -49,7 +49,7 @@ class OrderRepository
             }
             return $query->with('orderProducts')->orderBy('created_at', 'desc')->get();
         }
-        return $query->with('orderProducts')->orderBy('created_at', 'desc')->paginate(5);        
+        return $query->with('orderProducts')->orderBy('created_at', 'desc')->paginate(8);        
     }
 
     /**

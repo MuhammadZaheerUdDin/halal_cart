@@ -73,7 +73,7 @@
                                             <div class="input-row">
                                                 <div class="input-group">
                                                     <label for="phone_number">Phone Number</label>
-                                                    <input type="text" id="phone_number" wire:model="phone_number" placeholder="phone number" />
+                                                    <input type="text" id="phone_number" wire:model="phone_number" placeholder="Phone Number" />
                                                     @error('phone_number')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror

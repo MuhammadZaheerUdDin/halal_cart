@@ -43,6 +43,7 @@ class OrderComponent extends Component
     }
 
     public function showTab($status){
+        // dd($status);
         if($status == 'paid' || $status == 'processing' || $status == 'shipped' || $status == 'review' || $status == 'completed' || $status == 'cancelled'){
             $this->status = $status;
         }else{
@@ -83,6 +84,7 @@ class OrderComponent extends Component
         // Only allow cancellation for certain statuses
         if (in_array($order->status, Order::$cancelableStatuses)) {
             $order->status = 'cancelled';
+            // dd('z');
             $order->save();            
             // $refund = Stripe\Refund::create([
             //     'charge' => $order->transaction_id, // ID of the Stripe patment

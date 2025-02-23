@@ -96,13 +96,7 @@
                     <div class="custom-row">
                         <div class="footer-all-links-wrap justify-content-between d-flex">
                             <div class="footer-links">
-                                <h2 class="ft-clr">Get premium meat delivered direct <span style="font-size: 35px; font-family: 'Brush Script MT', cursive; color : #ffd700;">to you</span>.</h2>
-                                <div class="email-input">
-                                    <input type="email" placeholder="Enter Email Address" />
-                                    <button type="submit">
-                                        <span>&#8594;</span> <!-- Arrow Icon -->
-                                    </button>
-                                </div>
+                                <livewire:user.newsletter-subscription />
 
                                 <!-- Social Media Icons -->
                                 <div class="social-icons">

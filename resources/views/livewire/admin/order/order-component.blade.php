@@ -26,25 +26,24 @@
 
             <ul style="padding-bottom: 5px;" class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
                 <li class="me-2">
-                    <a href="" {{ $status == 'all' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'all' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('all')">ALL</a>
+                    <a href="javascript:void(0);" {{ $status == 'all' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'all' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('all')">ALL</a>
                 </li>
                 <li class="me-2">
-                    <a href="" {{ $status == 'paid' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'paid' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('paid')">Paid</a>
+                    <a href="javascript:void(0);" {{ $status == 'paid' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'paid' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('paid')">Paid</a>
                 </li>
                 <li class="me-2">
-                    <a href="" {{ $status == 'processing' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'processing' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('processing')">Processing</a>
+                    <a href="javascript:void(0);" {{ $status == 'processing' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'processing' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('processing')">Processing</a>
                 </li>
                 <li class="me-2">
-                    <a href="" {{ $status == 'paid' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'shipped' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('shipped')">Shipped</a>
+                    <a href="javascript:void(0);" {{ $status == 'paid' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'shipped' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('shipped')">Shipped</a>
                 </li>
                 <li class="me-2">
-                    <a href="" {{ $status == 'paid' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'completed' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('completed')">Completed</a>
+                    <a href="javascript:void(0);" {{ $status == 'paid' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'completed' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('completed')">Completed</a>
                 </li>
                 <li>
-                    <a href="" {{ $status == 'paid' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'cancelled' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('cancelled')">Cancelled</a>
+                    <a href="javascript:void(0);" {{ $status == 'paid' ? 'aria-current="page"' : '' }} class=" inline-block p-4 rounded-t-lg {{ $status == 'cancelled' ? ' dark:bg-gray-800 text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 active' }}"  wire:click="showTab('cancelled')">Cancelled</a>
                 </li>
             </ul>
-                          
             <table  class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-950 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">    
                     {{-- <thead> --}}
@@ -89,7 +88,7 @@
                             <td class="text-center ">
                                 <div class="">
                                     @if($product_order->next_status)
-                                        <span style="display: flow;">Update Status</span>
+                                        <span style="display: flow;"><b>Update Status</b></span>
                                         <button 
                                         onclick="showConfirmation('updateStatus', {{ $product_order->id }}, '{{ ucfirst($product_order->next_status) }}')"
                                         {{-- wire:click="updateStatus({{ $product_order->id }})" --}}
@@ -104,7 +103,8 @@
                                     @if(in_array($product_order->status, \App\Models\Order::$cancelableStatuses))
                                         <button
                                         {{-- onclick="showConfirmation('markFailedDelivery', {{ $product_order->id }}, 'Mark as Failed Delivery')"  --}}
-                                        wire:click="cancelOrder({{ $product_order->id }})"
+                                        {{-- wire:click="cancelOrder({{ $product_order->id }})" --}}
+                                        onclick="showConfirmation('cancelOrder', {{ $product_order->id }}, '{{ ucfirst('Cancel. <br>Order #'.$product_order->order_number.' of User <b>'.$product_order->user->name. '</b> $'.$product_order->total .' would be refunded <br>') }}')"
                                             class="px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                             Cancel Order
                                         </button>
@@ -129,17 +129,36 @@
         function showConfirmation(action, productId, message) {
             Swal.fire({
                 title: 'Are you sure?',
-                text: `You are about to ${message}. This action cannot be undone.`,
+                // text: `You are about to ${message}. This action cannot be undone.`,
+                html: `
+            <p>You are about to ${message}. This action cannot be undone.</p>
+            <label>
+                <input type="checkbox" id="confirmCheckbox"> I understand and agree
+            </label>
+                `,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, proceed!',
-                cancelButtonText: 'Cancel'
+                cancelButtonText: 'Cancel',
+                didOpen: () => {
+                    const confirmButton = Swal.getConfirmButton();
+                    const checkbox = document.getElementById('confirmCheckbox');
+
+                    confirmButton.disabled = true; // Initially disable confirm button
+
+                    checkbox.addEventListener('change', () => {
+                        confirmButton.disabled = !checkbox.checked; // Enable only when checked
+                    });
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
                     try {
                     Livewire.dispatch(action, { product_id: productId });
+                    if(action === 'cancelOrder'){
+                        message = 'Order Cancel and Payment Refund'
+                    }
                     Swal.fire(
                         'Success!',
                         `The action "${message}" has been performed.`,

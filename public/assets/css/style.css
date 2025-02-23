@@ -420,7 +420,7 @@ body, html {
 
 /* Responsive Columns */
 .col-md-4 {
-    flex: 1;
+    /* flex: 1; */
 }
 
 /* Left Section: Align Left */
@@ -7441,6 +7441,7 @@ body, html {
 .row {
     display: flex;
     justify-content: space-around;
+    justify-content: flex-start;
     /*margin-top: 20px;*/
 }
 
@@ -8013,6 +8014,7 @@ img {vertical-align: middle;}
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
+    justify-content: flex-start;
      /* margin-top: 20px; */
     }
 }
