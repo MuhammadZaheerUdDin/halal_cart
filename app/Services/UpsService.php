@@ -42,6 +42,7 @@ class UpsService
 
     public function trackParcel($trackingNumber, $accessToken)
     {
+        
         $url = $this->baseUrl . "/api/track/v1/details/{$trackingNumber}";
 
         $response = Http::withHeaders([
