@@ -10,5 +10,5 @@ class Admin extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\AdminFactory> */
     use HasFactory;
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password','google2fa_secret','google2fa_enabled'];
 }

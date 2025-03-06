@@ -129,7 +129,7 @@
                                     <li><a href="case-studie.html">How it Works</a></li>
                                     <li><a href="pricing.html">FAQ</a></li>
                                     <li><a href="feature.html">Contact Us</a></li>
-                                    <li><a href="overview.html">Refer a Friend</a></li>
+                                    {{-- <li><a href="overview.html">Refer a Friend</a></li> --}}
                                 </ul>
                             </div>
                             <div class="footer-links">

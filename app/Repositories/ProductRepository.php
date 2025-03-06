@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Models\Product;
 use App\Models\ProductVariant;
+use Illuminate\Support\Facades\Auth;
 
 class ProductRepository
 {
@@ -19,9 +20,13 @@ class ProductRepository
         if (!empty($filters['subcategory_id'])) {
             $query->where('subcategory_id', $filters['subcategory_id']);
         }
+        if (!empty($filters['name'])) {
+            $query->where('name', 'like', '%' . $filters['name'] . '%');
+        }
 
-        if (!empty($filters['search'])) {
-            $query->where('name', 'like', '%' . $filters['search'] . '%');
+        if(Auth::guard('admin')->user()->id){
+            // return $query->get();
+            return $query->with('variants', 'images')->paginate(10);
         }
 
         return $query->get();

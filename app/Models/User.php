@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,9 +12,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use PragmaRX\Google2FALaravel\Support\Authenticator;
 
 class User extends Authenticatable
 {
+    // use \PragmaRX\Google2FALaravel\Support\Authenticator;
     use HasApiTokens;
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -30,7 +34,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'user_role'
+        'user_role',
+        'google2fa_secret',
+        'google2fa_enabled'
     ];
 
     /**
@@ -67,6 +73,15 @@ class User extends Authenticatable
         ];
     }
 
+    protected function google2faSecret(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) =>  decrypt($value),
+            set: fn ($value) =>  encrypt($value),
+        );
+
+    }
+    
     public function cart(): HasOne
     {
         return $this->hasOne(Cart::class);

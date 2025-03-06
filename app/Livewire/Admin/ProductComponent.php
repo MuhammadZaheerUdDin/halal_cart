@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVariant;
 use App\Models\SubCategory;
+use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 use Livewire\WithoutUrlPagination;
@@ -20,6 +21,8 @@ class ProductComponent extends Component
     use WithPagination,WithoutUrlPagination;
 
     public $search = '';
+    private $productRepository;
+    public $sub_categories,$subcategory_id;
 
     protected $paginationTheme = 'tailwind'; // Use Tailwind pagination theme
     public $products, $variants = [], $images = [];
@@ -45,20 +48,39 @@ class ProductComponent extends Component
         ];
     }
 
+    public function __construct()
+    {
+        $this->productRepository = app(ProductRepository::class); // Resolve repository instance
+    }
+
     public function mount()
     {
         $this->categories = Category::first();//all();
         $this->subcategories = SubCategory::all();
     }
+    
 
     public function render()
     {
+        $filters = [
+            'name' => $this->search,
+            'category_id' => $this->category_id,
+            'subcategory_id' => $this->subcategory_id,
+        ];
+        $all_products = $this->productRepository->getAll($filters);
+
         // $this->products = Product::all();
         // $this->products=Product::all()->with('variants', 'images') ;//orderBy('created_at', 'desc')//->paginate(10);
 
-        $all_products = Product::where('name', 'like', '%' . $this->search . '%')->with('variants', 'images')->paginate(10);
-        
+        // $all_products = Product::where('name', 'like', '%' . $this->search . '%')->with('variants', 'images')->paginate(10);
         return view('livewire.admin.product',compact('all_products'))->layout('admin.layouts.app');
+    }
+    
+    public function resetFilter()
+    {
+        $this->search = '';
+        $this->category_id = '';
+        $this->subcategory_id = '';
     }
 
     public function resetFields()

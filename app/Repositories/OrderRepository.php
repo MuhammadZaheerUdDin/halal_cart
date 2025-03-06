@@ -16,13 +16,13 @@ class OrderRepository
     {
         // dd($filters['status']);
         $query = Order::query();
-        if(!empty(Auth::user()->id)){
-            if(!empty(Auth::user()->user_role) && (Auth::user()->user_role == "super_admin")){
+        // if(!empty(Auth::user()->id)){
+            if(!empty(Auth::guard('admin')->user()->user_role) && (Auth::guard('admin')->user()->user_role == "super_admin")){
 
             }else{
-                $query->where('user_id', Auth::user()->id);
+                $query->where('user_id', Auth::guard('admin')->user()->id);
             }
-        }
+        // }
 
         if (!empty($filters['category_id'])) {
             $query->where('category_id', $filters['category_id']);
@@ -37,7 +37,7 @@ class OrderRepository
             $query->where('status', 'like', '%' . $filters['status'] . '%');
         }
             // dd($filters);
-        if(empty(Auth::user()->user_role)){
+        if(empty(Auth::guard('admin')->user()->user_role)){
             if (!empty($filters['start_date']) && !empty($filters['end_date'])) {
                 $query->whereBetween('created_at', [$filters['start_date'], $filters['end_date']]);
                 // dd($filters);

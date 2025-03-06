@@ -45,7 +45,21 @@ class AdminAuthController extends Controller
 
         if ($admin && Hash::check($request->password, $admin->password)) {
             Auth::guard('admin')->login($admin);
-            return redirect()->route('admin.dashboard');
+            $admin = Auth::guard('admin')->user();
+            // dd($admin);
+            // if ($admin->google2fa_secret) {
+            if ($admin->google2fa_enabled) {
+                    // 2FA is enabled, redirect to 2FA verification page
+                if (empty($admin->google2fa_secret)) {
+                    return redirect()->route('admin.2fa.register');
+                }else{
+                    return redirect()->route('admin.2fa.verify');
+                }
+            } else {
+                // 2FA is not enabled, proceed to dashboard
+                return redirect()->intended('admin/dashboard');
+            }
+            // return redirect()->route('admin.dashboard');
         }
 
         return back()->withErrors(['email' => 'Invalid email or password']);

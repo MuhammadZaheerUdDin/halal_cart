@@ -15,10 +15,19 @@
     <!-- body  -->
     <div class=" border-div">
         <button type="button" onclick="window.location.href='{{ route('admin.product.create') }}'"
-            class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Create Product</button>
-
-        <input type="text" wire:model.live="search" placeholder="Search Products..." class="p-2 border rounded mb-4 w-full">
-
+            class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 ">Create Product</button>
+        <div class="row col-span-2 col-md-6 " style="">
+            <input type="text" wire:model.live="search" placeholder="Search Products..." class="p-2 border rounded mb-4 w-full">        
+            <select wire:model.live="subcategory_id" class="p-5 border rounded mb-4 w-full">
+                <option value="">Select Subcategory</option>
+                @foreach($subcategories as $subcategory)
+                    <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                @endforeach
+            </select>
+            <button type="button" wire:click="resetFilter" class="text-green-700 border border-green-700 rounded-lg text-sm px-5 me-2 mb-2">
+                Clear Search
+            </button>
+        </div>
         <!-- Product List -->
         {{-- <table class="w-full border-collapse border border-gray-700 table table-auto  rounded-lg"> --}}
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

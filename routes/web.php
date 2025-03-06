@@ -6,6 +6,7 @@ use App\Livewire\Admin\ProductComponent as AdminProductComponent;
 // use App\Livewire\Admin\CategoryComponent as AdminCategoryComponent;
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\TwoFactorAuthController;
 use App\Http\Controllers\User\StripePaymentController;
 use App\Livewire\Admin\Category\CategoryComponent as AdminCategoryComponent;
 use App\Livewire\Admin\Category\SubCategoryComponent as AdminSubCategoryComponent;
@@ -16,6 +17,8 @@ use App\Livewire\ProductDetailComponent;
 use App\Livewire\User\HomeComponent;
 use App\Livewire\User\OrderComponent;
 use App\Livewire\Admin\Order\OrderComponent as AdminOrderComponent;
+use App\Livewire\Admin\TwoFactorAuthComponent;
+use App\Livewire\Admin\UsersList;
 use App\Livewire\User\ProfileComponent;
 use App\Models\Category;
 
@@ -50,18 +53,26 @@ use Illuminate\Support\Facades\Storage;
 
 
 // Admin Routes
+Route::middleware('auth:admin')->group(function () {
+    Route::get('admin/2fa/register', [TwoFactorAuthComponent::class, 'render'])->name('admin.2fa.register');
+    Route::post('admin/2fa/register', [TwoFactorAuthComponent::class, 'enableTwoFactorAuth'])->name('admin.2fa.register');
+    Route::get('admin/2fa/verify', [TwoFactorAuthComponent::class, 'verify'])->name('admin.2fa.verify');
+    Route::post('admin/2fa/verify', [TwoFactorAuthComponent::class, 'verifyTwoFactorAuth'])->name('admin.2fa.verify');
+});
+
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.post');
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-    Route::middleware('auth:admin')->group(function () {
+    Route::middleware(['auth:admin','2fa'])->group(function () {
         Route::get('/dashboard', function () {
             return view('admin.dashboard'); // Create a dashboard view
         })->name('admin.dashboard');
         Route::get('/', function () {
             return view('admin.dashboard'); // Create a dashboard view
         })->name('admin');
+        Route::get('/users',UsersList::class)->name('admin.users');
         Route::get('/products',AdminProductComponent::class)->name('admin.products');
         Route::get('/product/create',AdminProductCreateCompoment::class)->name('admin.product.create');
         Route::get('/product/edit/{id}', AdminProductCreateCompoment::class)->name('admin.product.edit');

@@ -29,7 +29,7 @@ class NewsletterRepository
         }
 
         // Create the subscription
-        NewsletterSubscriber::create([
+        UserNewsletterSubscriber::create([
             'user_id' => $user->id,
             'email' => $email,
         ]);

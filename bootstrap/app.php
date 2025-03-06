@@ -12,7 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            // '2fa' => \PragmaRX\Google2FALaravel\Middleware::class,
+            '2fa' => \App\Http\Middleware\VerifyTwoFactorAuth::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

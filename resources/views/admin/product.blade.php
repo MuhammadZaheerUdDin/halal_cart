@@ -43,7 +43,7 @@
             <label for="image">Image:</label>
             <input type="file" id="image" wire:model="image" class="w-full">
             @error('image') <span class="text-red-500">{{ $message }}</span> @enderror
-        </div>
+        </div>c
 
         <button type="submit" class="bg-blue-500 text-white p-2 mt-4">
             {{ $isEditing ? 'Update Product' : 'Add Product' }}
