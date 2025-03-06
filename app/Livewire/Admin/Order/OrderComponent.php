@@ -7,14 +7,17 @@ use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Ptondereau\LaravelUpsApi\Facades\UpsTracking;
-use Ptondereau\LaravelUpsApi\UpsApiServiceProvider;
+// use Ptondereau\LaravelUpsApi\Facades\UpsTracking;
+// use Ptondereau\LaravelUpsApi\UpsApiServiceProvider;
 use Stripe;
 use Stripe\Refund;
+use App\Services\Ups\UpsService;
+use Illuminate\Http\Request;
 
 class OrderComponent extends Component
 {
     protected $listeners = ['updateStatus','cancelOrder'];
+    protected $upsService;
 
     private $orderRepository;
     public $status = 'all';
@@ -22,7 +25,9 @@ class OrderComponent extends Component
     public function __construct()
     {
         $this->orderRepository = app(OrderRepository::class); // Resolve repository instance
+        $this->upsService = app(UpsService::class);//$upsService;
     }
+
     public function render()
     {
         $status = $this->status;
@@ -113,4 +118,27 @@ class OrderComponent extends Component
         }
     }
             
+    public function getToken()
+    {
+        try {
+            $token = $this->upsService->getAuthToken();
+            dd($token);
+            return response()->json($token);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function trackParcel(Request $request)
+    {
+        $trackingNumber = $request->input('tracking_number');
+        $accessToken = $request->input('access_token');
+
+        try {
+            $parcelInfo = $this->upsService->trackParcel($trackingNumber, $accessToken);
+            return response()->json($parcelInfo);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

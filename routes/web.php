@@ -79,6 +79,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/categories',AdminCategoryComponent::class)->name('admin.categories');
         Route::get('/subcategories',AdminSubCategoryComponent::class)->name('admin.subcategories');
         Route::get('/orders',AdminOrderComponent::class)->name('admin.orders');
+        // Route::get('orders/ups/token', [AdminOrderComponent::class, 'getToken']);
     });
 });
 
