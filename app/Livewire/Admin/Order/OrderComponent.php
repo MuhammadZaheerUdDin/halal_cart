@@ -117,12 +117,12 @@ class OrderComponent extends Component
             session()->flash('error', 'Failed delivery can only be marked for shipped orders.');
         }
     }
-            
+
     public function getToken()
     {
         try {
             $token = $this->upsService->getAuthToken();
-            dd($token);
+            // dd($token);
             return response()->json($token);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

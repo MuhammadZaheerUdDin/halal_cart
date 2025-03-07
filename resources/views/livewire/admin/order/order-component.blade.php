@@ -1,7 +1,11 @@
 <div class="w-3/4 mx-auto" >
     {{-- <button wire:click="getToken" class="bg-blue-500 text-white px-4 py-2 rounded">
         Order getToken
-    </button> --}}
+    </button>
+    <a href="javascript:void(0);" class=" inline-block p-4 rounded-t-lg  "
+     wire:click="getToken" aria-current="&quot;page&quot;">
+        Paid
+    </a> --}}
     <h1 class="text-2xl font-bold">Manage Products</h1>
 
     <div class="w-4/5 border-div" style="">
