@@ -145,7 +145,10 @@
                                 <option value="price-high">Price: High to Low</option>
                             </select>
                         </div>
-                        <div>{{ $products->count() }} Results Found</div>
+                        <div>
+                          {{-- {{ is_array($products) ? count($products) : ($products->count() ?? 0) }} --}}
+                          {{ optional($products)->count() ?? 0 }}
+                          Results Found</div>
                     </div>
                     
                     <div class="row g-4">
@@ -232,6 +235,13 @@
                             </div>
                         </div> --}}
                         <!-- Add more cards as needed -->
+                        @if($currentPage != $lastPage)
+                          <div class="col-md-12 mt-5 text-center">
+                            <button wire:click="loadMore" class="btn viw-btn">
+                                Load More
+                            </button>
+                          </div>
+                        @endif
                     </div>
                 </div>
             </div>

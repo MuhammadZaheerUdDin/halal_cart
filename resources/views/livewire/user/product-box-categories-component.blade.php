@@ -198,6 +198,13 @@
               </div>
 
             @endforeach
+            @if($currentPage != $lastPage)
+            <div class="col-md-12 mt-5 text-center">
+              <button wire:click="loadMore" class="btn viw-btn">
+                  Load More
+              </button>
+            </div>
+          @endif
 
           </div>
       </div>

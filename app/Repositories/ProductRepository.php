@@ -24,12 +24,15 @@ class ProductRepository
             $query->where('name', 'like', '%' . $filters['name'] . '%');
         }
 
-        if(Auth::guard('admin')->user()->id){
+        if(!empty(Auth::guard('admin')->user())){
             // return $query->get();
             return $query->with('variants', 'images')->paginate(10);
         }
 
-        return $query->get();
+        // return $query->get();
+        $filters['perPage'] = $filters['perPage'] ?? 10; // Default to 10 if not set
+
+        return $query->paginate($filters['perPage']);
     }
 
     /**
