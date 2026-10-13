@@ -1,6 +1,7 @@
-<<<<<<< HEAD
+<img width="1200" height="5216" alt="ecommerce-design" src="https://github.com/user-attachments/assets/63db9f45-6bf3-4dbb-afb8-7212d816b969" /><<<<<<< HEAD
 # halal_cart
-e-comerce website
+e-comerce halal meet website and admin panel
+
 =======
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
